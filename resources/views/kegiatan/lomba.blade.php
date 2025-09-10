@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard - Mazer Admin Dashboard')
-@section('page-heading', 'Profile Statistics')
+@section('title', 'Lomba')
+@section('page-heading', 'Lomba')
 
 @section('content')
 
