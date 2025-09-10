@@ -2,9 +2,8 @@
     <div class="sidebar-wrapper active">
         <div class="sidebar-header">
             <div class="d-flex justify-content-between">
-                <div class="logo">
-                    <a href="index.html"><img src="build/assets/images/logo/logo.png" alt="Logo" srcset=""></a>
-                </div>
+                <img src="build/assets/images/logo/ibatek.png" alt="Logo" style="width: 150px; height:50px;">
+
                 <div class="toggler">
                     <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
                 </div>
