@@ -12,9 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kepaniitiaans', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+        $table->id();
+        $table->string('name'); // <-- Pastikan baris ini ada
+        $table->string('event_name')->nullable();
+        $table->date('start_date');
+        $table->date('end_date');
+        $table->timestamps();
+    });
     }
 
     /**
