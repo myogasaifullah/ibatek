@@ -8,58 +8,68 @@ use Illuminate\Http\Request;
 class TridharmaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan daftar semua data tridharma.
      */
     public function index()
     {
-        //
+        $tridharmas = Tridharma::all();
+        return view('kegiatan.tridharma.index', compact('tridharmas'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Menampilkan form untuk membuat data tridharma baru.
      */
     public function create()
     {
-        //
+        return view('kegiatan.tridharma.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Menyimpan data tridharma yang baru dibuat ke database.
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'type' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+            'researcher_name' => 'nullable|string',
+            'date' => 'required|date',
+        ]);
+
+        Tridharma::create($validatedData);
+        return redirect()->route('tridharma')->with('success', 'Data tridharma berhasil ditambahkan.');
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Tridharma $tridharma)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Menampilkan form untuk mengedit data tridharma yang ada.
      */
     public function edit(Tridharma $tridharma)
     {
-        //
+        return view('kegiatan.tridharma.edit', compact('tridharma'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Memperbarui data tridharma yang ada di database.
      */
     public function update(Request $request, Tridharma $tridharma)
     {
-        //
+        $validatedData = $request->validate([
+            'type' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+            'researcher_name' => 'nullable|string',
+            'date' => 'required|date',
+        ]);
+
+        $tridharma->update($validatedData);
+        return redirect()->route('tridharma')->with('success', 'Data tridharma berhasil diperbarui.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Menghapus data tridharma dari database.
      */
     public function destroy(Tridharma $tridharma)
     {
-        //
+        $tridharma->delete();
+        return redirect()->route('tridharma')->with('success', 'Data tridharma berhasil dihapus.');
     }
 }

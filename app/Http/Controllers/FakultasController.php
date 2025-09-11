@@ -12,7 +12,8 @@ class FakultasController extends Controller
      */
     public function index()
     {
-        //
+        $fakultas = Fakultas::all();
+        return view('akademik.fakultas.index', compact('fakultas'));
     }
 
     /**
@@ -20,7 +21,7 @@ class FakultasController extends Controller
      */
     public function create()
     {
-        //
+        return view('akademik.fakultas.create');
     }
 
     /**
@@ -28,7 +29,13 @@ class FakultasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+
+        Fakultas::create($validatedData);
+        return redirect()->route('fakultas')->with('success', 'Fakultas berhasil ditambahkan.');
     }
 
     /**
@@ -44,7 +51,7 @@ class FakultasController extends Controller
      */
     public function edit(Fakultas $fakultas)
     {
-        //
+        return view('akademik.fakultas.edit', compact('fakultas'));
     }
 
     /**
@@ -52,7 +59,13 @@ class FakultasController extends Controller
      */
     public function update(Request $request, Fakultas $fakultas)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+        ]);
+
+        $fakultas->update($validatedData);
+        return redirect()->route('fakultas')->with('success', 'Fakultas berhasil diperbarui.');
     }
 
     /**
@@ -60,6 +73,7 @@ class FakultasController extends Controller
      */
     public function destroy(Fakultas $fakultas)
     {
-        //
+        $fakultas->delete();
+        return redirect()->route('fakultas')->with('success', 'Fakultas berhasil dihapus.');
     }
 }

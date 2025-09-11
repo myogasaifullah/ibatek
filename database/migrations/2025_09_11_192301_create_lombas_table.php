@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('lombas', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('organizer');
+            $table->date('date');
             $table->timestamps();
         });
     }

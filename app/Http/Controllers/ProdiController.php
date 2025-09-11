@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fakultas;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,9 @@ class ProdiController extends Controller
      */
     public function index()
     {
-        //
+        // Mengambil semua data prodi dari database
+        $prodis = Prodi::with('fakultas')->get();
+        return view('akademik.prodi.index', compact('prodis'));
     }
 
     /**
@@ -20,7 +23,8 @@ class ProdiController extends Controller
      */
     public function create()
     {
-        //
+        $fakultas = Fakultas::all();
+        return view('akademik.prodi.create', compact('fakultas'));
     }
 
     /**
@@ -28,15 +32,13 @@ class ProdiController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $validatedData = $request->validate([
+            'fakultas_id' => 'required|exists:fakultas,id',
+            'name' => 'required|string|max:255',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Prodi $prodi)
-    {
-        //
+        Prodi::create($validatedData);
+        return redirect()->route('prodi')->with('success', 'Program Studi berhasil ditambahkan.');
     }
 
     /**
@@ -44,7 +46,8 @@ class ProdiController extends Controller
      */
     public function edit(Prodi $prodi)
     {
-        //
+        $fakultas = Fakultas::all();
+        return view('akademik.prodi.edit', compact('prodi', 'fakultas'));
     }
 
     /**
@@ -52,7 +55,13 @@ class ProdiController extends Controller
      */
     public function update(Request $request, Prodi $prodi)
     {
-        //
+        $validatedData = $request->validate([
+            'fakultas_id' => 'required|exists:fakultas,id',
+            'name' => 'required|string|max:255',
+        ]);
+
+        $prodi->update($validatedData);
+        return redirect()->route('prodi')->with('success', 'Program Studi berhasil diperbarui.');
     }
 
     /**
@@ -60,6 +69,7 @@ class ProdiController extends Controller
      */
     public function destroy(Prodi $prodi)
     {
-        //
+        $prodi->delete();
+        return redirect()->route('prodi')->with('success', 'Program Studi berhasil dihapus.');
     }
 }

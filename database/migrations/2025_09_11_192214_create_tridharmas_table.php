@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('tridharmas', function (Blueprint $table) {
             $table->id();
+            $table->string('type');
+            $table->string('title');
+            $table->string('researcher_name')->nullable();
+            $table->date('date');
             $table->timestamps();
         });
     }
