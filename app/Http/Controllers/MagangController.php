@@ -8,58 +8,68 @@ use Illuminate\Http\Request;
 class MagangController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan daftar semua data magang.
      */
     public function index()
     {
-        //
+        $magangs = Magang::all();
+        return view('kegiatan.magang.index', compact('magangs'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Menampilkan form untuk membuat data magang baru.
      */
     public function create()
     {
-        //
+        return view('kegiatan.magang.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Menyimpan data magang yang baru dibuat ke database.
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'company_name' => 'required|string|max:255',
+            'position' => 'required|string|max:255',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+        ]);
+
+        Magang::create($validatedData);
+        return redirect()->route('magang')->with('success', 'Data magang berhasil ditambahkan.');
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Magang $magang)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
+     * Menampilkan form untuk mengedit data magang yang ada.
      */
     public function edit(Magang $magang)
     {
-        //
+        return view('kegiatan.magang.edit', compact('magang'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Memperbarui data magang yang ada di database.
      */
     public function update(Request $request, Magang $magang)
     {
-        //
+        $validatedData = $request->validate([
+            'company_name' => 'required|string|max:255',
+            'position' => 'required|string|max:255',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+        ]);
+
+        $magang->update($validatedData);
+        return redirect()->route('magang')->with('success', 'Data magang berhasil diperbarui.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Menghapus data magang dari database.
      */
     public function destroy(Magang $magang)
     {
-        //
+        $magang->delete();
+        return redirect()->route('magang')->with('success', 'Data magang berhasil dihapus.');
     }
 }

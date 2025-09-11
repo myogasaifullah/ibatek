@@ -12,8 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('magangs', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        $table->id();
+        $table->string('company_name');
+        $table->string('position');
+        $table->date('start_date');
+        $table->date('end_date');
+        $table->timestamps();
         });
     }
 
