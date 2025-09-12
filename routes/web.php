@@ -82,6 +82,8 @@ Route::resource('fakultas', FakultasController::class)->names([
     'edit' => 'fakultas.edit',
     'update' => 'fakultas.update',
     'destroy' => 'fakultas.destroy'
+])->parameters([
+    'fakultas' => 'fakultas',
 ]);
 
 Route::resource('prodi', ProdiController::class)->names([
