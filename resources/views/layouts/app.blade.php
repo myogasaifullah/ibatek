@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('build/assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('build/assets/css/app.css') }}">
     <link rel="shortcut icon" href="{{ asset('build/assets/images/favicon.svg') }}" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @stack('styles')
 </head>
@@ -49,6 +50,32 @@
     <script src="{{ asset('build/assets/js/main.js') }}"></script>
 
     @stack('scripts')
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const deleteForms = document.querySelectorAll('.delete-form');
+        
+        deleteForms.forEach(form => {
+            form.addEventListener('submit', function (event) {
+                event.preventDefault(); // Mencegah form dikirimkan secara langsung
+
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Data ini tidak dapat dikembalikan!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.submit(); // Mengirimkan form jika pengguna mengonfirmasi
+                    }
+                });
+            });
+        });
+    });
+</script>
 </body>
 
 </html>

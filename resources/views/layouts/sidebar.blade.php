@@ -2,8 +2,11 @@
     <div class="sidebar-wrapper active">
         <div class="sidebar-header">
             <div class="d-flex justify-content-between">
-                <img src="build/assets/images/logo/ibatek.png" alt="Logo" style="width: 150px; height:50px;">
-
+                <div class="logo">
+                    <a href="{{ route('dashboard') }}">
+                        <img src="{{ asset('build/assets/images/logo/ibatek.png') }}" alt="Logo" style="width: 150px; height:50px;">
+                    </a>
+                </div>
                 <div class="toggler">
                     <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
                 </div>
@@ -23,8 +26,11 @@
                 <li class="sidebar-title">Admin &amp; Data</li>
 
                 @php
-                    $kegiatanRoutes = ['organisasi', 'kepanitiaan', 'magang', 'tridharma', 'lomba'];
-                    $isKegiatanActive = in_array(Route::currentRouteName(), $kegiatanRoutes);
+                    $isKegiatanActive = str_starts_with(Route::currentRouteName(), 'organisasi') ||
+                                        str_starts_with(Route::currentRouteName(), 'kepanitiaan') ||
+                                        str_starts_with(Route::currentRouteName(), 'magang') ||
+                                        str_starts_with(Route::currentRouteName(), 'tridharma') ||
+                                        str_starts_with(Route::currentRouteName(), 'lomba');
                 @endphp
                 <li class="sidebar-item has-sub {{ $isKegiatanActive ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
@@ -32,27 +38,27 @@
                         <span>Kegiatan</span>
                     </a>
                     <ul class="submenu {{ $isKegiatanActive ? 'active' : '' }}">
-                        <li class="submenu-item {{ Route::currentRouteName() == 'organisasi' ? 'active' : '' }}">
+                        <li class="submenu-item {{ str_starts_with(Route::currentRouteName(), 'organisasi') ? 'active' : '' }}">
                             <a href="{{ route('organisasi') }}">Organisasi</a>
                         </li>
-                        <li class="submenu-item {{ Route::currentRouteName() == 'kepanitiaan' ? 'active' : '' }}">
+                        <li class="submenu-item {{ str_starts_with(Route::currentRouteName(), 'kepanitiaan') ? 'active' : '' }}">
                             <a href="{{ route('kepanitiaan') }}">Kepanitiaan</a>
                         </li>
-                        <li class="submenu-item {{ Route::currentRouteName() == 'magang' ? 'active' : '' }}">
+                        <li class="submenu-item {{ str_starts_with(Route::currentRouteName(), 'magang') ? 'active' : '' }}">
                             <a href="{{ route('magang') }}">Magang</a>
                         </li>
-                        <li class="submenu-item {{ Route::currentRouteName() == 'tridharma' ? 'active' : '' }}">
+                        <li class="submenu-item {{ str_starts_with(Route::currentRouteName(), 'tridharma') ? 'active' : '' }}">
                             <a href="{{ route('tridharma') }}">Tridharma</a>
                         </li>
-                        <li class="submenu-item {{ Route::currentRouteName() == 'lomba' ? 'active' : '' }}">
+                        <li class="submenu-item {{ str_starts_with(Route::currentRouteName(), 'lomba') ? 'active' : '' }}">
                             <a href="{{ route('lomba') }}">Lomba</a>
                         </li>
                     </ul>
                 </li>
 
                 @php
-                    $akademikRoutes = ['fakultas', 'prodi'];
-                    $isAkademikActive = in_array(Route::currentRouteName(), $akademikRoutes);
+                    $isAkademikActive = str_starts_with(Route::currentRouteName(), 'fakultas') ||
+                                        str_starts_with(Route::currentRouteName(), 'prodi');
                 @endphp
                 <li class="sidebar-item has-sub {{ $isAkademikActive ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
@@ -60,10 +66,10 @@
                         <span>Akademik</span>
                     </a>
                     <ul class="submenu {{ $isAkademikActive ? 'active' : '' }}">
-                        <li class="submenu-item {{ Route::currentRouteName() == 'fakultas' ? 'active' : '' }}">
+                        <li class="submenu-item {{ str_starts_with(Route::currentRouteName(), 'fakultas') ? 'active' : '' }}">
                             <a href="{{ route('fakultas') }}">Fakultas</a>
                         </li>
-                        <li class="submenu-item {{ Route::currentRouteName() == 'prodi' ? 'active' : '' }}">
+                        <li class="submenu-item {{ str_starts_with(Route::currentRouteName(), 'prodi') ? 'active' : '' }}">
                             <a href="{{ route('prodi') }}">Prodi</a>
                         </li>
                     </ul>
