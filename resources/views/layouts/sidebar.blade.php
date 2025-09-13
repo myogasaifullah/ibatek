@@ -26,11 +26,11 @@
                 <li class="sidebar-title">Admin &amp; Data</li>
 
                 @php
-                    $isKegiatanActive = str_starts_with(Route::currentRouteName(), 'organisasi') ||
-                                        str_starts_with(Route::currentRouteName(), 'kepanitiaan') ||
-                                        str_starts_with(Route::currentRouteName(), 'magang') ||
-                                        str_starts_with(Route::currentRouteName(), 'tridharma') ||
-                                        str_starts_with(Route::currentRouteName(), 'lomba');
+                $isKegiatanActive = str_starts_with(Route::currentRouteName(), 'organisasi') ||
+                str_starts_with(Route::currentRouteName(), 'kepanitiaan') ||
+                str_starts_with(Route::currentRouteName(), 'magang') ||
+                str_starts_with(Route::currentRouteName(), 'tridharma') ||
+                str_starts_with(Route::currentRouteName(), 'lomba');
                 @endphp
                 <li class="sidebar-item has-sub {{ $isKegiatanActive ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
@@ -57,8 +57,8 @@
                 </li>
 
                 @php
-                    $isAkademikActive = str_starts_with(Route::currentRouteName(), 'fakultas') ||
-                                        str_starts_with(Route::currentRouteName(), 'prodi');
+                $isAkademikActive = str_starts_with(Route::currentRouteName(), 'fakultas') ||
+                str_starts_with(Route::currentRouteName(), 'prodi');
                 @endphp
                 <li class="sidebar-item has-sub {{ $isAkademikActive ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
@@ -103,14 +103,16 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class='sidebar-link' style="border: none; background: none; width: 100%; text-align: left; padding: 0;">
+                        <a href="#" class="sidebar-link"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="bi bi-box-arrow-right"></i>
                             <span>Logout</span>
-                        </button>
+                        </a>
                     </form>
                 </li>
+
 
             </ul>
         </div>

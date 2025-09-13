@@ -56,6 +56,11 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
+        // Convert empty password to null to pass nullable validation
+        if ($request->has('password') && $request->password === '') {
+            $request->merge(['password' => null]);
+        }
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'npm' => 'required|string|max:255|unique:users,npm,' . $id,

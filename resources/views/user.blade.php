@@ -172,7 +172,7 @@
 
 @endsection
 
-@section('scripts')
+@push('scripts')
 <script>
 $(document).ready(function() {
     // Create User
@@ -184,12 +184,16 @@ $(document).ready(function() {
             data: $(this).serialize(),
             success: function(response) {
                 $('#createUserModal').modal('hide');
+                Swal.fire('Success!', 'User created successfully.', 'success');
                 location.reload();
             },
             error: function(xhr) {
                 var errors = xhr.responseJSON.errors;
-                // Handle errors
-                console.log(errors);
+                var errorMessage = 'An error occurred.';
+                if (errors) {
+                    errorMessage = Object.values(errors).flat().join('\n');
+                }
+                Swal.fire('Error!', errorMessage, 'error');
             }
         });
     });
@@ -197,6 +201,7 @@ $(document).ready(function() {
     // Edit User
     $('.edit-btn').on('click', function() {
         var userId = $(this).data('id');
+        $('#editUserModal').modal('show');
         $.get('{{ url("users") }}/' + userId, function(data) {
             $('#editUserId').val(data.id);
             $('#editName').val(data.name);
@@ -206,24 +211,50 @@ $(document).ready(function() {
             $('#editAngkatan').val(data.angkatan);
             $('#editNomorTelpon').val(data.nomor_telpon);
             $('#editEmail').val(data.email);
-            $('#editUserModal').modal('show');
+            // Clear password fields on edit
+            $('#editPassword').val('');
+            $('#editPasswordConfirmation').val('');
+        }).fail(function(xhr) {
+            $('#editUserModal').modal('hide');
+            var errorMessage = 'Failed to load user data.';
+            if (xhr.responseJSON && xhr.responseJSON.message) {
+                errorMessage = xhr.responseJSON.message;
+            }
+            Swal.fire('Error!', errorMessage, 'error');
         });
     });
 
     $('#editUserForm').on('submit', function(e) {
         e.preventDefault();
         var userId = $('#editUserId').val();
+        var formData = $(this).serializeArray();
+
+        // Remove password and password_confirmation if password is empty
+        var passwordField = formData.find(field => field.name === 'password');
+        if (passwordField && passwordField.value === '') {
+            formData = formData.filter(field => field.name !== 'password' && field.name !== 'password_confirmation');
+            // Explicitly add empty password_confirmation to avoid mismatch
+            formData.push({name: 'password_confirmation', value: ''});
+        }
+
+        console.log('Edit form data:', formData); // Debug log
+
         $.ajax({
             url: '{{ url("users") }}/' + userId,
-            method: 'PUT',
-            data: $(this).serialize(),
+            method: 'POST',
+            data: $.param(formData),
             success: function(response) {
                 $('#editUserModal').modal('hide');
+                Swal.fire('Success!', 'User updated successfully.', 'success');
                 location.reload();
             },
             error: function(xhr) {
                 var errors = xhr.responseJSON.errors;
-                console.log(errors);
+                var errorMessage = 'An error occurred.';
+                if (errors) {
+                    errorMessage = Object.values(errors).flat().join('\n');
+                }
+                Swal.fire('Error!', errorMessage, 'error');
             }
         });
     });
@@ -234,9 +265,10 @@ $(document).ready(function() {
         if (confirm('Are you sure you want to delete this user?')) {
             $.ajax({
                 url: '{{ url("users") }}/' + userId,
-                method: 'DELETE',
+                method: 'POST',
                 data: {
-                    _token: '{{ csrf_token() }}'
+                    _token: '{{ csrf_token() }}',
+                    _method: 'DELETE'
                 },
                 success: function(response) {
                     location.reload();
@@ -246,4 +278,4 @@ $(document).ready(function() {
     });
 });
 </script>
-@endsection
+@endpush

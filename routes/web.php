@@ -104,7 +104,7 @@ Route::get('/kesimpulan', function () {
     return view('kesimpulan');
 })->name('kesimpulan');
 
-    Route::resource('users', \App\Http\Controllers\UserController::class)->names([
+    Route::resource('users', \App\Http\Controllers\UserController::class)->middleware('auth')->names([
         'index' => 'user',
         'create' => 'user.create',
         'store' => 'user.store',
