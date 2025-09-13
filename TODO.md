@@ -1,0 +1,4 @@
+- [x] Update UserController validation and create/update methods to handle npm, fakultas, prodi, angkatan, nomor_telpon.
+- [x] Update user.blade.php table to display all user fields.
+- [ ] Update create and edit modals in user.blade.php to include inputs for new fields.
+- [ ] Update JavaScript in user.blade.php to handle new fields in AJAX requests.

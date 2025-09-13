@@ -19,6 +19,11 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
+                            <th>NPM</th>
+                            <th>Fakultas</th>
+                            <th>Prodi</th>
+                            <th>Angkatan</th>
+                            <th>Nomor Telpon</th>
                             <th>Email</th>
                             <th>Created At</th>
                             <th>Actions</th>
@@ -29,6 +34,11 @@
                         <tr>
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
+                            <td>{{ $user->npm }}</td>
+                            <td>{{ $user->fakultas }}</td>
+                            <td>{{ $user->prodi }}</td>
+                            <td>{{ $user->angkatan }}</td>
+                            <td>{{ $user->nomor_telpon }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->created_at->format('Y-m-d') }}</td>
                             <td>
@@ -58,6 +68,26 @@
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="npm" class="form-label">NPM</label>
+                        <input type="text" class="form-control" id="npm" name="npm" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fakultas" class="form-label">Fakultas</label>
+                        <input type="text" class="form-control" id="fakultas" name="fakultas" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="prodi" class="form-label">Prodi</label>
+                        <input type="text" class="form-control" id="prodi" name="prodi" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="angkatan" class="form-label">Angkatan</label>
+                        <input type="number" class="form-control" id="angkatan" name="angkatan" min="1900" max="{{ date('Y') + 10 }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nomor_telpon" class="form-label">Nomor Telpon</label>
+                        <input type="text" class="form-control" id="nomor_telpon" name="nomor_telpon" required>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
@@ -97,6 +127,26 @@
                     <div class="mb-3">
                         <label for="editName" class="form-label">Name</label>
                         <input type="text" class="form-control" id="editName" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editNpm" class="form-label">NPM</label>
+                        <input type="text" class="form-control" id="editNpm" name="npm" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editFakultas" class="form-label">Fakultas</label>
+                        <input type="text" class="form-control" id="editFakultas" name="fakultas" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editProdi" class="form-label">Prodi</label>
+                        <input type="text" class="form-control" id="editProdi" name="prodi" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editAngkatan" class="form-label">Angkatan</label>
+                        <input type="number" class="form-control" id="editAngkatan" name="angkatan" min="1900" max="{{ date('Y') + 10 }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editNomorTelpon" class="form-label">Nomor Telpon</label>
+                        <input type="text" class="form-control" id="editNomorTelpon" name="nomor_telpon" required>
                     </div>
                     <div class="mb-3">
                         <label for="editEmail" class="form-label">Email</label>
@@ -150,6 +200,11 @@ $(document).ready(function() {
         $.get('{{ url("users") }}/' + userId, function(data) {
             $('#editUserId').val(data.id);
             $('#editName').val(data.name);
+            $('#editNpm').val(data.npm);
+            $('#editFakultas').val(data.fakultas);
+            $('#editProdi').val(data.prodi);
+            $('#editAngkatan').val(data.angkatan);
+            $('#editNomorTelpon').val(data.nomor_telpon);
             $('#editEmail').val(data.email);
             $('#editUserModal').modal('show');
         });

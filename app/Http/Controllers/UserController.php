@@ -19,6 +19,11 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
+            'npm' => 'required|string|max:255|unique:users',
+            'fakultas' => 'required|string|max:255',
+            'prodi' => 'required|string|max:255',
+            'angkatan' => 'required|integer|min:1900|max:' . (date('Y') + 10),
+            'nomor_telpon' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
@@ -29,6 +34,11 @@ class UserController extends Controller
 
         $user = User::create([
             'name' => $request->name,
+            'npm' => $request->npm,
+            'fakultas' => $request->fakultas,
+            'prodi' => $request->prodi,
+            'angkatan' => $request->angkatan,
+            'nomor_telpon' => $request->nomor_telpon,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
@@ -48,6 +58,11 @@ class UserController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
+            'npm' => 'required|string|max:255|unique:users,npm,' . $id,
+            'fakultas' => 'required|string|max:255',
+            'prodi' => 'required|string|max:255',
+            'angkatan' => 'required|integer|min:1900|max:' . (date('Y') + 10),
+            'nomor_telpon' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
             'password' => 'nullable|string|min:8|confirmed',
         ]);
@@ -57,6 +72,11 @@ class UserController extends Controller
         }
 
         $user->name = $request->name;
+        $user->npm = $request->npm;
+        $user->fakultas = $request->fakultas;
+        $user->prodi = $request->prodi;
+        $user->angkatan = $request->angkatan;
+        $user->nomor_telpon = $request->nomor_telpon;
         $user->email = $request->email;
         if ($request->password) {
             $user->password = Hash::make($request->password);

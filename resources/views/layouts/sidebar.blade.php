@@ -96,6 +96,16 @@
                     </a>
                 </li>
 
+                <li class="sidebar-item">
+                    <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                        @csrf
+                        <button type="submit" class='sidebar-link' style="border: none; background: none; width: 100%; text-align: left; padding: 0;">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Logout</span>
+                        </button>
+                    </form>
+                </li>
+
             </ul>
         </div>
         <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
