@@ -138,14 +138,14 @@
         <!-- Header dengan logo -->
         <div class="orange-bg py-6 px-6 text-center">
             <div class="logo-container">
-                <i class="fas fa-citrus text-white text-4xl"></i>
+                 <img src="{{ asset('build/assets/images/logo/ibtk.png') }}" alt="Logo">
             </div>
             <h2 class="text-white text-2xl font-bold mt-4">Buat Akun Baru</h2>
             <p class="text-orange-100 mt-2">Isi data diri Anda untuk mendaftar</p>
         </div>
         
         <div class="p-6">
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                 @csrf
 
                 <!-- Name -->
@@ -248,6 +248,17 @@
                     @endif
                 </div>
 
+                <!-- Profile Photo -->
+                <div class="mb-6">
+                    <label for="profile_photo" class="block text-gray-700 text-sm font-bold mb-2">
+                        <i class="fas fa-image text-orange-500 mr-1"></i> Foto Profil
+                    </label>
+                    <input id="profile_photo" class="input-focus shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="file" name="profile_photo" accept="image/*">
+                    @if ($errors->has('profile_photo'))
+                        <p class="text-red-500 text-xs italic mt-2">{{ $errors->first('profile_photo') }}</p>
+                    @endif
+                </div>
+
                 <div class="flex items-center justify-between mt-6">
                     <a class="inline-block align-baseline font-bold text-sm orange-text hover:text-orange-800 transition-colors" href="{{ route('login') }}">
                         Sudah punya akun?
@@ -258,22 +269,7 @@
                     </button>
                 </div>
                 
-                <!-- Divider -->
-                <div class="relative flex items-center mt-6 mb-4">
-                    <div class="flex-grow border-t border-gray-300"></div>
-                    <span class="flex-shrink mx-4 text-gray-500 text-sm">Atau daftar dengan</span>
-                    <div class="flex-grow border-t border-gray-300"></div>
-                </div>
                 
-                <!-- Social Register -->
-                <div class="grid grid-cols-2 gap-4 mt-4">
-                    <a href="#" class="py-2 px-4 bg-white border border-gray-300 rounded-md flex items-center justify-center text-gray-700 hover:bg-gray-50 transition-colors">
-                        <i class="fab fa-google text-red-500 mr-2"></i> Google
-                    </a>
-                    <a href="#" class="py-2 px-4 bg-blue-600 text-white rounded-md flex items-center justify-center hover:bg-blue-700 transition-colors">
-                        <i class="fab fa-facebook-f mr-2"></i> Facebook
-                    </a>
-                </div>
             </form>
         </div>
     </div>

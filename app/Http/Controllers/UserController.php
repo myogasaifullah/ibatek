@@ -26,10 +26,16 @@ class UserController extends Controller
             'nomor_telpon' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
+            'profile_photo' => 'nullable|image|max:2048', // max 2MB
         ]);
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $profilePhotoPath = null;
+        if ($request->hasFile('profile_photo')) {
+            $profilePhotoPath = $request->file('profile_photo')->store('profile_photos', 'public');
         }
 
         $user = User::create([
@@ -41,6 +47,8 @@ class UserController extends Controller
             'nomor_telpon' => $request->nomor_telpon,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'profile_photo' => $profilePhotoPath,
+            'role' => 'client',
         ]);
 
         return response()->json(['success' => 'User created successfully.', 'user' => $user]);
@@ -70,6 +78,7 @@ class UserController extends Controller
             'nomor_telpon' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
             'password' => 'nullable|string|min:8|confirmed',
+            'profile_photo' => 'nullable|image|max:2048', // max 2MB
         ]);
 
         if ($validator->fails()) {
@@ -83,6 +92,12 @@ class UserController extends Controller
         $user->angkatan = $request->angkatan;
         $user->nomor_telpon = $request->nomor_telpon;
         $user->email = $request->email;
+
+        if ($request->hasFile('profile_photo')) {
+            $profilePhotoPath = $request->file('profile_photo')->store('profile_photos', 'public');
+            $user->profile_photo = $profilePhotoPath;
+        }
+
         if ($request->password) {
             $user->password = Hash::make($request->password);
         }

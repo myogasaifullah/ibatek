@@ -75,6 +75,13 @@
                     </ul>
                 </li>
 
+                 <li class="sidebar-item {{ Route::currentRouteName() == 'user' ? 'active' : '' }}">
+                    <a href="{{ route('user') }}" class='sidebar-link'>
+                        <i class="bi bi-person-badge-fill"></i>
+                        <span>Data User</span>
+                    </a>
+                </li>
+
                 <li class="sidebar-title">User</li>
 
 
@@ -88,21 +95,21 @@
                 <li class="sidebar-item {{ Route::currentRouteName() == 'kesimpulan' ? 'active' : '' }}">
                     <a href="{{ route('kesimpulan') }}" class='sidebar-link'>
                         <i class="bi bi-map-fill"></i>
-                        <span>Kesimpulan</span>
+                        <span>Laporan</span>
                     </a>
 
                 </li>
 
                 <li class="sidebar-title">Pages</li>
 
-                <li class="sidebar-item {{ Route::currentRouteName() == 'user' ? 'active' : '' }}">
-                    <a href="{{ route('user') }}" class='sidebar-link'>
-                        <i class="bi bi-person-badge-fill"></i>
-                        <span>User</span>
+                <li class="sidebar-item {{ Route::currentRouteName() == 'profile.edit' ? 'active' : '' }}">
+                    <a href="{{ route('profile.edit') }}" class='sidebar-link'>
+                        <i class="bi bi-person-fill"></i>
+                        <span>Profile</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item">
+                               <li class="sidebar-item">
                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
                         @csrf
                         <a href="#" class="sidebar-link"

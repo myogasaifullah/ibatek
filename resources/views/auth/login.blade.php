@@ -116,17 +116,14 @@
         <!-- Header dengan logo -->
         <div class="orange-bg py-6 px-6 text-center">
             <div class="logo-container">
-                <i class="fas fa-citrus text-white text-4xl"></i>
+                 <img src="{{ asset('build/assets/images/logo/ibtk.png') }}" alt="Logo">
             </div>
             <h2 class="text-white text-2xl font-bold mt-4">Selamat Datang</h2>
             <p class="text-orange-100 mt-2">Masuk ke akun Anda untuk melanjutkan</p>
         </div>
         
         <div class="p-6">
-            <!-- Session Status -->
-            <div class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" :class="{ 'hidden': !session('status') }">
-                {{ session('status') }}
-            </div>
+            
 
             <form method="POST" action="{{ route('login') }}">
                 @csrf
@@ -173,27 +170,11 @@
                     </button>
                 </div>
                 
-                <!-- Divider -->
-                <div class="relative flex items-center mt-6 mb-4">
-                    <div class="flex-grow border-t border-gray-300"></div>
-                    <span class="flex-shrink mx-4 text-gray-500 text-sm">Atau lanjutkan dengan</span>
-                    <div class="flex-grow border-t border-gray-300"></div>
-                </div>
-                
-                <!-- Social Login -->
-                <div class="grid grid-cols-2 gap-4 mt-4">
-                    <a href="#" class="py-2 px-4 bg-white border border-gray-300 rounded-md flex items-center justify-center text-gray-700 hover:bg-gray-50 transition-colors">
-                        <i class="fab fa-google text-red-500 mr-2"></i> Google
-                    </a>
-                    <a href="#" class="py-2 px-4 bg-blue-600 text-white rounded-md flex items-center justify-center hover:bg-blue-700 transition-colors">
-                        <i class="fab fa-facebook-f mr-2"></i> Facebook
-                    </a>
-                </div>
-                
+                                
                 <!-- Register link -->
                 <div class="text-center mt-6">
                     <p class="text-gray-600 text-sm">Belum punya akun? 
-                        <a href="#" class="font-bold orange-text hover:text-orange-800 transition-colors">Daftar sekarang</a>
+                        <a href="/register" class="font-bold orange-text hover:text-orange-800 transition-colors">Daftar sekarang</a>
                     </p>
                 </div>
             </form>

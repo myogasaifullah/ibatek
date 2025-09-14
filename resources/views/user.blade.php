@@ -17,7 +17,7 @@
                 <table class="table table-striped" id="usersTable">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>Foto</th>
                             <th>Name</th>
                             <th>NPM</th>
                             <th>Fakultas</th>
@@ -32,7 +32,17 @@
                     <tbody>
                         @foreach($users as $user)
                         <tr>
-                            <td>{{ $user->id }}</td>
+                            <td >
+                        @if ($user->profile_photo)
+                            <img src="{{ asset('storage/' . $user->profile_photo) }}"
+     alt="Profile Photo"
+     class="rounded-circle border border-3 border-primary"
+     style="width: 64px; height: 64px; object-fit: cover;" />
+
+                        @else
+                            <span>No Photo</span>
+                        @endif
+                    </td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->npm }}</td>
                             <td>{{ $user->fakultas }}</td>
@@ -62,7 +72,7 @@
                 <h5 class="modal-title" id="createUserModalLabel">Add User</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="createUserForm">
+            <form id="createUserForm" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
@@ -101,6 +111,10 @@
                         <label for="password_confirmation" class="form-label">Confirm Password</label>
                         <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="profile_photo" class="form-label">Profile Photo</label>
+                        <input type="file" class="form-control" id="profile_photo" name="profile_photo" accept="image/*">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -119,7 +133,7 @@
                 <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="editUserForm">
+            <form id="editUserForm" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
@@ -160,6 +174,10 @@
                         <label for="editPasswordConfirmation" class="form-label">Confirm Password</label>
                         <input type="password" class="form-control" id="editPasswordConfirmation" name="password_confirmation">
                     </div>
+                    <div class="mb-3">
+                        <label for="editProfilePhoto" class="form-label">Profile Photo</label>
+                        <input type="file" class="form-control" id="editProfilePhoto" name="profile_photo" accept="image/*">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -174,108 +192,109 @@
 
 @push('scripts')
 <script>
-$(document).ready(function() {
-    // Create User
-    $('#createUserForm').on('submit', function(e) {
-        e.preventDefault();
-        $.ajax({
-            url: '{{ route("user.store") }}',
-            method: 'POST',
-            data: $(this).serialize(),
-            success: function(response) {
-                $('#createUserModal').modal('hide');
-                Swal.fire('Success!', 'User created successfully.', 'success');
-                location.reload();
-            },
-            error: function(xhr) {
-                var errors = xhr.responseJSON.errors;
-                var errorMessage = 'An error occurred.';
-                if (errors) {
-                    errorMessage = Object.values(errors).flat().join('\n');
+    $(document).ready(function() {
+        // Create User
+        $('#createUserForm').on('submit', function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                url: '{{ route("user.store") }}',
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    $('#createUserModal').modal('hide');
+                    Swal.fire('Success!', 'User created successfully.', 'success');
+                    location.reload();
+                },
+                error: function(xhr) {
+                    var errors = xhr.responseJSON.errors;
+                    var errorMessage = 'An error occurred.';
+                    if (errors) {
+                        errorMessage = Object.values(errors).flat().join('\n');
+                    }
+                    Swal.fire('Error!', errorMessage, 'error');
                 }
-                Swal.fire('Error!', errorMessage, 'error');
-            }
+            });
         });
-    });
 
-    // Edit User
-    $('.edit-btn').on('click', function() {
-        var userId = $(this).data('id');
-        $('#editUserModal').modal('show');
-        $.get('{{ url("users") }}/' + userId, function(data) {
-            $('#editUserId').val(data.id);
-            $('#editName').val(data.name);
-            $('#editNpm').val(data.npm);
-            $('#editFakultas').val(data.fakultas);
-            $('#editProdi').val(data.prodi);
-            $('#editAngkatan').val(data.angkatan);
-            $('#editNomorTelpon').val(data.nomor_telpon);
-            $('#editEmail').val(data.email);
-            // Clear password fields on edit
-            $('#editPassword').val('');
-            $('#editPasswordConfirmation').val('');
-        }).fail(function(xhr) {
-            $('#editUserModal').modal('hide');
-            var errorMessage = 'Failed to load user data.';
-            if (xhr.responseJSON && xhr.responseJSON.message) {
-                errorMessage = xhr.responseJSON.message;
-            }
-            Swal.fire('Error!', errorMessage, 'error');
-        });
-    });
-
-    $('#editUserForm').on('submit', function(e) {
-        e.preventDefault();
-        var userId = $('#editUserId').val();
-        var formData = $(this).serializeArray();
-
-        // Remove password and password_confirmation if password is empty
-        var passwordField = formData.find(field => field.name === 'password');
-        if (passwordField && passwordField.value === '') {
-            formData = formData.filter(field => field.name !== 'password' && field.name !== 'password_confirmation');
-            // Explicitly add empty password_confirmation to avoid mismatch
-            formData.push({name: 'password_confirmation', value: ''});
-        }
-
-        console.log('Edit form data:', formData); // Debug log
-
-        $.ajax({
-            url: '{{ url("users") }}/' + userId,
-            method: 'POST',
-            data: $.param(formData),
-            success: function(response) {
+        // Edit User
+        $('.edit-btn').on('click', function() {
+            var userId = $(this).data('id');
+            $('#editUserModal').modal('show');
+            $.get('{{ url("users") }}/' + userId, function(data) {
+                $('#editUserId').val(data.id);
+                $('#editName').val(data.name);
+                $('#editNpm').val(data.npm);
+                $('#editFakultas').val(data.fakultas);
+                $('#editProdi').val(data.prodi);
+                $('#editAngkatan').val(data.angkatan);
+                $('#editNomorTelpon').val(data.nomor_telpon);
+                $('#editEmail').val(data.email);
+                // Clear password fields on edit
+                $('#editPassword').val('');
+                $('#editPasswordConfirmation').val('');
+            }).fail(function(xhr) {
                 $('#editUserModal').modal('hide');
-                Swal.fire('Success!', 'User updated successfully.', 'success');
-                location.reload();
-            },
-            error: function(xhr) {
-                var errors = xhr.responseJSON.errors;
-                var errorMessage = 'An error occurred.';
-                if (errors) {
-                    errorMessage = Object.values(errors).flat().join('\n');
+                var errorMessage = 'Failed to load user data.';
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    errorMessage = xhr.responseJSON.message;
                 }
                 Swal.fire('Error!', errorMessage, 'error');
-            }
+            });
         });
-    });
 
-    // Delete User
-    $('.delete-btn').on('click', function() {
-        var userId = $(this).data('id');
-        if (confirm('Are you sure you want to delete this user?')) {
+        $('#editUserForm').on('submit', function(e) {
+            e.preventDefault();
+            var userId = $('#editUserId').val();
+            var formData = new FormData(this);
+
+            // Remove password and password_confirmation if password is empty
+            if ($('#editPassword').val() === '') {
+                formData.delete('password');
+                formData.delete('password_confirmation');
+            }
+
             $.ajax({
                 url: '{{ url("users") }}/' + userId,
                 method: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    _method: 'DELETE'
-                },
+                data: formData,
+                processData: false,
+                contentType: false,
                 success: function(response) {
+                    $('#editUserModal').modal('hide');
+                    Swal.fire('Success!', 'User updated successfully.', 'success');
                     location.reload();
+                },
+                error: function(xhr) {
+                    var errors = xhr.responseJSON.errors;
+                    var errorMessage = 'An error occurred.';
+                    if (errors) {
+                        errorMessage = Object.values(errors).flat().join('\n');
+                    }
+                    Swal.fire('Error!', errorMessage, 'error');
                 }
             });
-        }
+        });
+
+        // Delete User
+        $('.delete-btn').on('click', function() {
+            var userId = $(this).data('id');
+            if (confirm('Are you sure you want to delete this user?')) {
+                $.ajax({
+                    url: '{{ url("users") }}/' + userId,
+                    method: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        _method: 'DELETE'
+                    },
+                    success: function(response) {
+                        location.reload();
+                    }
+                });
+            }
+        });
     });
-});
 </script>
 @endpush

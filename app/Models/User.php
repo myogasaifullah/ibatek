@@ -24,6 +24,7 @@ class User extends Authenticatable
         'prodi',
         'angkatan',
         'nomor_telpon',
+        'profile_photo',
         'email',
         'password',
     ];
