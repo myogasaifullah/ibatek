@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h2 class="h4 text-dark">Daftar Fakultas</h2>
+                    <h2 class="h4 text-dark" style="color: #163357 !important;">Daftar Fakultas</h2>
                     <a href="{{ route('fakultas.create') }}" class="btn btn-primary">Tambah Fakultas</a>
                 </div>
 

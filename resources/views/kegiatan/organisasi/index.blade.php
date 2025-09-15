@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h2 class="h4 text-dark">Daftar Organisasi</h2>
+                    <h2 class="h4 text-dark" style="color: #163357 !important;">Daftar Organisasi</h2>
                     <a href="{{ route('organisasi.create') }}" class="btn btn-primary">Tambah Organisasi</a>
                 </div>
 

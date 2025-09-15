@@ -237,7 +237,7 @@
             </p>
           </div>
           <div class="col-xl-5 pt-2 pt-xl-0 text-center text-xl-end">
-            <p class="mb-0">&copy; This template is made with ❤️ by <a class="text-300" href="" target="_blank"> Ibatek</a></p>
+            <p class="mb-0">&copy; This template is made with by <a class="text-300" href="" target="_blank"> Ibatek</a></p>
           </div>
         </div>
       </div>

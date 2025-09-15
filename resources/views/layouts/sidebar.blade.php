@@ -26,11 +26,11 @@
                 <li class="sidebar-title">Admin &amp; Data</li>
 
                 @php
-                $isKegiatanActive = str_starts_with(Route::currentRouteName(), 'organisasi') ||
-                str_starts_with(Route::currentRouteName(), 'kepanitiaan') ||
-                str_starts_with(Route::currentRouteName(), 'magang') ||
-                str_starts_with(Route::currentRouteName(), 'tridharma') ||
-                str_starts_with(Route::currentRouteName(), 'lomba');
+                    $isKegiatanActive = str_starts_with(Route::currentRouteName(), 'organisasi') ||
+                                        str_starts_with(Route::currentRouteName(), 'kepanitiaan') ||
+                                        str_starts_with(Route::currentRouteName(), 'magang') ||
+                                        str_starts_with(Route::currentRouteName(), 'tridharma') ||
+                                        str_starts_with(Route::currentRouteName(), 'lomba');
                 @endphp
                 <li class="sidebar-item has-sub {{ $isKegiatanActive ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
@@ -57,8 +57,8 @@
                 </li>
 
                 @php
-                $isAkademikActive = str_starts_with(Route::currentRouteName(), 'fakultas') ||
-                str_starts_with(Route::currentRouteName(), 'prodi');
+                    $isAkademikActive = str_starts_with(Route::currentRouteName(), 'fakultas') ||
+                                        str_starts_with(Route::currentRouteName(), 'prodi');
                 @endphp
                 <li class="sidebar-item has-sub {{ $isAkademikActive ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
@@ -75,15 +75,25 @@
                     </ul>
                 </li>
 
-                 <li class="sidebar-item {{ Route::currentRouteName() == 'user' ? 'active' : '' }}">
-                    <a href="{{ route('user') }}" class='sidebar-link'>
+                @php
+                    $isUserManagementActive = str_starts_with(Route::currentRouteName(), 'users.');
+                @endphp
+                <li class="sidebar-item has-sub {{ $isUserManagementActive ? 'active' : '' }}">
+                    <a href="#" class='sidebar-link'>
                         <i class="bi bi-person-badge-fill"></i>
-                        <span>Data User</span>
+                        <span>User Management</span>
                     </a>
+                    <ul class="submenu {{ $isUserManagementActive ? 'active' : '' }}">
+                        <li class="submenu-item {{ Route::currentRouteName() == 'users.list' ? 'active' : '' }}">
+                            <a href="{{ route('users.list') }}">Daftar User</a>
+                        </li>
+                        <li class="submenu-item {{ Route::currentRouteName() == 'users.admins' ? 'active' : '' }}">
+                            <a href="{{ route('users.admins') }}">Daftar Admin</a>
+                        </li>
+                    </ul>
                 </li>
 
-                <li class="sidebar-title">User</li>
-
+                <li class="sidebar-title">Pages</li>
 
                 <li class="sidebar-item {{ Route::currentRouteName() == 'upload' ? 'active' : '' }}">
                     <a href="{{ route('upload') }}" class='sidebar-link'>
@@ -95,31 +105,9 @@
                 <li class="sidebar-item {{ Route::currentRouteName() == 'kesimpulan' ? 'active' : '' }}">
                     <a href="{{ route('kesimpulan') }}" class='sidebar-link'>
                         <i class="bi bi-map-fill"></i>
-                        <span>Laporan</span>
-                    </a>
-
-                </li>
-
-                <li class="sidebar-title">Pages</li>
-
-                <li class="sidebar-item {{ Route::currentRouteName() == 'profile.edit' ? 'active' : '' }}">
-                    <a href="{{ route('profile.edit') }}" class='sidebar-link'>
-                        <i class="bi bi-person-fill"></i>
-                        <span>Profile</span>
+                        <span>Kesimpulan</span>
                     </a>
                 </li>
-
-                               <li class="sidebar-item">
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <a href="#" class="sidebar-link"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <i class="bi bi-box-arrow-right"></i>
-                            <span>Logout</span>
-                        </a>
-                    </form>
-                </li>
-
 
             </ul>
         </div>
