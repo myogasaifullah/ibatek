@@ -9,7 +9,7 @@
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2 class="h4 text-dark">Daftar Admin</h2>
-                <a href="{{ route('user.createAdmin') }}" class="btn btn-success">Tambah Admin</a>
+                <a href="{{ route('users.createAdmin') }}" class="btn btn-success">Tambah Admin</a>
             </div>
 
             @if (session('success'))

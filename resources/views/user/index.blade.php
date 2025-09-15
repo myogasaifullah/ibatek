@@ -8,7 +8,7 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="h4 text-dark">Daftar User</h2>
+                <h2 class="h4 text-dark" style="color: #163357 !important;">Daftar User</h2>
                 <div>
                     <a href="{{ route('users.create') }}" class="btn btn-primary">Tambah User</a>
                     <a href="{{ route('users.createAdmin') }}" class="btn btn-success">Tambah Admin</a>

@@ -12,13 +12,22 @@ use App\Http\Controllers\LombaController;
 use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\UserController;
+use App\Models\User;
+use App\Models\Organization;
+use App\Models\Fakultas;
+use App\Models\Prodi;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $totalUsers = User::count();
+    $totalOrganizations = Organization::count();
+    $totalFakultas = Fakultas::count();
+    $totalProdi = Prodi::count();
+    
+    return view('dashboard', compact('totalUsers', 'totalOrganizations', 'totalFakultas', 'totalProdi'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -102,6 +111,8 @@ Route::middleware('auth')->group(function () {
         'edit' => 'fakultas.edit',
         'update' => 'fakultas.update',
         'destroy' => 'fakultas.destroy'
+    ])->parameters([
+        'fakultas' => 'fakultas', // Ini memastikan nama parameter sesuai
     ]);
 
     Route::resource('prodi', ProdiController::class)->names([

@@ -75,8 +75,25 @@
                     </ul>
                 </li>
 
-                <li class="sidebar-title">User</li>
+                @php
+                    $isUserManagementActive = str_starts_with(Route::currentRouteName(), 'users.');
+                @endphp
+                <li class="sidebar-item has-sub {{ $isUserManagementActive ? 'active' : '' }}">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-person-badge-fill"></i>
+                        <span>User Management</span>
+                    </a>
+                    <ul class="submenu {{ $isUserManagementActive ? 'active' : '' }}">
+                        <li class="submenu-item {{ Route::currentRouteName() == 'users.list' ? 'active' : '' }}">
+                            <a href="{{ route('users.list') }}">Daftar User</a>
+                        </li>
+                        <li class="submenu-item {{ Route::currentRouteName() == 'users.admins' ? 'active' : '' }}">
+                            <a href="{{ route('users.admins') }}">Daftar Admin</a>
+                        </li>
+                    </ul>
+                </li>
 
+                <li class="sidebar-title">Pages</li>
 
                 <li class="sidebar-item {{ Route::currentRouteName() == 'upload' ? 'active' : '' }}">
                     <a href="{{ route('upload') }}" class='sidebar-link'>
@@ -89,16 +106,6 @@
                     <a href="{{ route('kesimpulan') }}" class='sidebar-link'>
                         <i class="bi bi-map-fill"></i>
                         <span>Kesimpulan</span>
-                    </a>
-
-                </li>
-
-                <li class="sidebar-title">Pages</li>
-
-                <li class="sidebar-item {{ str_starts_with(Route::currentRouteName(), 'users.') ? 'active' : '' }}">
-                    <a href="{{ route('users.index') }}" class='sidebar-link'>
-                        <i class="bi bi-person-badge-fill"></i>
-                        <span>User</span>
                     </a>
                 </li>
 
