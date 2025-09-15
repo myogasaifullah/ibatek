@@ -75,11 +75,24 @@
                     </ul>
                 </li>
 
-                 <li class="sidebar-item {{ Route::currentRouteName() == 'user' ? 'active' : '' }}">
-                    <a href="{{ route('user') }}" class='sidebar-link'>
+
+                @php
+                $isAkunActive = str_starts_with(Route::currentRouteName(), 'user') ||
+                str_starts_with(Route::currentRouteName(), 'admin');
+                @endphp
+                <li class="sidebar-item has-sub {{ $isAkunActive ? 'active' : '' }}">
+                    <a href="#" class='sidebar-link'>
                         <i class="bi bi-person-badge-fill"></i>
-                        <span>Data User</span>
+                        <span>Akun</span>
                     </a>
+                    <ul class="submenu {{ $isAkunActive ? 'active' : '' }}">
+                        <li class="submenu-item {{ str_starts_with(Route::currentRouteName(), 'user') ? 'active' : '' }}">
+                            <a href="{{ route('user') }}">User</a>
+                        </li>
+                        <li class="submenu-item {{ str_starts_with(Route::currentRouteName(), 'admin') ? 'active' : '' }}">
+                            <a href="{{ route('admin') }}">Admin</a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="sidebar-title">User</li>

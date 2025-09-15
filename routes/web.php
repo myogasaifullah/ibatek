@@ -113,4 +113,15 @@ Route::get('/kesimpulan', function () {
         'update' => 'user.update',
         'destroy' => 'user.destroy'
     ]);
+
+     Route::resource('admins', \App\Http\Controllers\AdminController::class)->middleware('auth')->names([
+        'index' => 'admin',
+        'create' => 'admin.create',
+        'store' => 'admin.store',
+        'show' => 'admin.show',
+        'edit' => 'admin.edit',
+        'update' => 'admin.update',
+        'destroy' => 'admin.destroy'
+    ]);
+
 require __DIR__ . '/auth.php';

@@ -6,13 +6,12 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
-class UserController extends Controller
+class AdminController extends Controller
 {
    public function index()
     {
         $users = User::all();
-        return view('user', compact('users'));
+        return view('admin', compact('users'));
     }
 
     public function store(Request $request)

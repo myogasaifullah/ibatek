@@ -1,3 +1,3 @@
-- [x] Add profile menu item to sidebar.blade.php
-- [x] Link to Laravel Breeze profile page (profile.edit route)
-- [x] Ensure active state highlighting for profile page
+- [x] Fix AdminController::index() to pass $users correctly
+- [x] Update routes/web.php to rename 'admins' routes to 'admin.*'
+- [x] Update admin.blade.php to use 'admin.*' routes and add 'client' role option
