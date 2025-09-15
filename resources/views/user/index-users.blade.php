@@ -23,7 +23,14 @@
                     <thead>
                         <tr>
                             <th scope="col">Nama</th>
+                            <th scope="col">NPM</th>
+                            <th scope="col">Fakultas</th>
+                            <th scope="col">Prodi</th>
+                            <th scope="col">Angkatan</th>
+                            <th scope="col">Nomor Telpon</th>
+                            <th scope="col">Foto Profil</th>
                             <th scope="col">Email</th>
+                            <th scope="col">Role</th>
                             <th scope="col">Dibuat Pada</th>
                             <th scope="col" class="text-center">Aksi</th>
                         </tr>
@@ -32,7 +39,20 @@
                         @forelse ($users as $user)
                             <tr>
                                 <td>{{ $user->name }}</td>
+                                <td>{{ $user->npm }}</td>
+                                <td>{{ $user->fakultas }}</td>
+                                <td>{{ $user->prodi }}</td>
+                                <td>{{ $user->angkatan }}</td>
+                                <td>{{ $user->nomor_telpon }}</td>
+                                <td>
+                                    @if($user->profile_photo)
+                                        <img src="{{ asset('storage/' . $user->profile_photo) }}" alt="Profile Photo" width="50" height="50">
+                                    @else
+                                        No Photo
+                                    @endif
+                                </td>
                                 <td>{{ $user->email }}</td>
+                                <td>{{ $user->role }}</td>
                                 <td>{{ $user->created_at->format('d-m-Y H:i') }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
@@ -45,7 +65,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="text-center">Belum ada data user.</td>
+                                <td colspan="11" class="text-center">Belum ada data user.</td>
                             </tr>
                         @endforelse
                     </tbody>

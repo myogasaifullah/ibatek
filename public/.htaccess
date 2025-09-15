@@ -13,6 +13,15 @@
     RewriteCond %{HTTP:x-xsrf-token} .
     RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
 
+    # Allow access to storage folder
+    RewriteRule ^storage/(.*)$ storage/$1 [L]
+
+    # Allow access to profile_photos folder inside storage
+    <Directory "C:/laragon/www/laravel/ibatek/ibatek/storage/app/public/profile_photos">
+        Require all granted
+        Options +Indexes
+    </Directory>
+
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$

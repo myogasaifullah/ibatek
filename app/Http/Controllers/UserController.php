@@ -12,72 +12,106 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('user.index', compact('users'));
+        return view('user', compact('users'));
     }
-    public function indexUsers()
-    {
-        $users = User::where('role', 'user')->get();
-        return view('user.index-users', compact('users'));
-    }
-    public function indexAdmins()
-    {
-        $admins = User::where('role', 'admin')->get();
-        return view('user.index-admins', compact('admins'));
-    }
-    public function create()
-    {
-        return view('user.create-user');
-    }
-    public function createAdmin()
-    {
-        return view('user.create-admin');
-    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
+            'npm' => 'required|string|max:255|unique:users',
+            'fakultas' => 'required|string|max:255',
+            'prodi' => 'required|string|max:255',
+            'angkatan' => 'required|integer|min:1900|max:' . (date('Y') + 10),
+            'nomor_telpon' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|in:admin,user',
+            'profile_photo' => 'nullable|image|max:2048', // max 2MB
         ]);
+
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            return response()->json(['errors' => $validator->errors()], 422);
         }
-        User::create([
+
+        $profilePhotoPath = null;
+        if ($request->hasFile('profile_photo')) {
+            $profilePhotoPath = $request->file('profile_photo')->store('profile_photos', 'public');
+        }
+
+        $user = User::create([
             'name' => $request->name,
+            'npm' => $request->npm,
+            'fakultas' => $request->fakultas,
+            'prodi' => $request->prodi,
+            'angkatan' => $request->angkatan,
+            'nomor_telpon' => $request->nomor_telpon,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role,
+            'profile_photo' => $profilePhotoPath,
+            'role' => 'client',
         ]);
-        return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan.');
-    }
-    public function edit(User $user)
-    {
-        return view('user.edit', compact('user'));
-    }
-    public function update(Request $request, User $user)
-    {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'password' => 'nullable|string|min:8|confirmed',
-            'role' => 'required|in:admin,user',
-        ]);
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password ? Hash::make($request->password) : $user->password,
-            'role' => $request->role,
-        ]);  
-        return redirect()->route('users.index')->with('success', 'User berhasil diperbarui.');
+
+        return response()->json(['success' => 'User created successfully.', 'user' => $user]);
     }
 
-    public function destroy(User $user)
+    public function show($id)
     {
-        $user->delete();
-        return redirect()->route('users.index')->with('success', 'User berhasil dihapus.');
+        $user = User::findOrFail($id);
+        return response()->json($user);
     }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        // Convert empty password to null to pass nullable validation
+        if ($request->has('password') && $request->password === '') {
+            $request->merge(['password' => null]);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'npm' => 'required|string|max:255|unique:users,npm,' . $id,
+            'fakultas' => 'required|string|max:255',
+            'prodi' => 'required|string|max:255',
+            'angkatan' => 'required|integer|min:1900|max:' . (date('Y') + 10),
+            'nomor_telpon' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'password' => 'nullable|string|min:8|confirmed',
+            'profile_photo' => 'nullable|image|max:2048', // max 2MB
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $user->name = $request->name;
+        $user->npm = $request->npm;
+        $user->fakultas = $request->fakultas;
+        $user->prodi = $request->prodi;
+        $user->angkatan = $request->angkatan;
+        $user->nomor_telpon = $request->nomor_telpon;
+        $user->email = $request->email;
+
+        if ($request->hasFile('profile_photo')) {
+            $profilePhotoPath = $request->file('profile_photo')->store('profile_photos', 'public');
+            $user->profile_photo = $profilePhotoPath;
+        }
+
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();
+
+        return response()->json(['success' => 'User updated successfully.', 'user' => $user]);
+    }
+
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return response()->json(['success' => 'User deleted successfully.']);
+    }
+    
 }
