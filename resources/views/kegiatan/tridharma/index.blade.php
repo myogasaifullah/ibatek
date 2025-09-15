@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h2 class="h4 text-dark">Daftar Data Tridharma</h2>
+                    <h2 class="h4 text-dark" style="color: #163357 !important;">Daftar Data Tridharma</h2>
                     <a href="{{ route('tridharma.create') }}" class="btn btn-primary">Tambah Data Tridharma</a>
                 </div>
 
