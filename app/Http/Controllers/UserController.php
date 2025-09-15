@@ -14,29 +14,24 @@ class UserController extends Controller
         $users = User::all();
         return view('user.index', compact('users'));
     }
-
     public function indexUsers()
     {
         $users = User::where('role', 'user')->get();
         return view('user.index-users', compact('users'));
     }
-
     public function indexAdmins()
     {
         $admins = User::where('role', 'admin')->get();
         return view('user.index-admins', compact('admins'));
     }
-
     public function create()
     {
         return view('user.create-user');
     }
-
     public function createAdmin()
     {
         return view('user.create-admin');
     }
-    
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -45,26 +40,21 @@ class UserController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'role' => 'required|in:admin,user',
         ]);
-
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $request->role,
         ]);
-
         return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan.');
     }
-
     public function edit(User $user)
     {
         return view('user.edit', compact('user'));
     }
-
     public function update(Request $request, User $user)
     {
         $validator = Validator::make($request->all(), [
@@ -73,18 +63,15 @@ class UserController extends Controller
             'password' => 'nullable|string|min:8|confirmed',
             'role' => 'required|in:admin,user',
         ]);
-
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password ? Hash::make($request->password) : $user->password,
             'role' => $request->role,
-        ]);
-        
+        ]);  
         return redirect()->route('users.index')->with('success', 'User berhasil diperbarui.');
     }
 

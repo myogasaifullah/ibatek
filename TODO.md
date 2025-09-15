@@ -1,0 +1,3 @@
+- [x] Add profile menu item to sidebar.blade.php
+- [x] Link to Laravel Breeze profile page (profile.edit route)
+- [x] Ensure active state highlighting for profile page

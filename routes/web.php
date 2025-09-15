@@ -28,8 +28,8 @@ Route::middleware('auth')->group(function () {
 
     // --- Rute Baru untuk User Management ---
     // Rute khusus harus didefinisikan sebelum rute resource
-    Route::get('/users/create-user', [UserController::class, 'create'])->name('user.create');
-    Route::get('/users/create-admin', [UserController::class, 'createAdmin'])->name('user.createAdmin');
+    Route::get('/users/create-user', [UserController::class, 'create'])->name('users.create');
+    Route::get('/users/create-admin', [UserController::class, 'createAdmin'])->name('users.createAdmin');
     Route::get('/users/list-users', [UserController::class, 'indexUsers'])->name('users.list');
     Route::get('/users/list-admins', [UserController::class, 'indexAdmins'])->name('users.admins');
     

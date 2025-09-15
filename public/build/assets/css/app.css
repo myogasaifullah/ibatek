@@ -202,7 +202,7 @@ body {
 }
 .btn.btn-light-primary {
     background-color: #ebf3ff;
-    color: #002152;
+    color: #ffa700;
 }
 .btn.btn-light-secondary {
     background-color: #e6eaee;
@@ -270,7 +270,7 @@ body {
 }
 .card.card-statistic {
     box-shadow: 1px 2px 5px rgba(47, 170, 244, 0.5);
-    background: linear-gradient(180deg, #25a6f1, #54b9ff);
+    background: linear-gradient(180deg, #ffa700, #ffa700);
 }
 .card.card-statistic .card-title {
     text-transform: uppercase;
@@ -1235,11 +1235,11 @@ a {
     color: #000;
 }
 .bg-gradient-ltr {
-    background: linear-gradient(90deg, #095cde, #53c3f3);
+    background: linear-gradient(90deg, #ffa700, #ffa700);
 }
 .bg-light-primary {
     background-color: #ebf3ff;
-    color: #002152;
+    color: #ffa700;
 }
 .bg-light-secondary {
     background-color: #e6eaee;
