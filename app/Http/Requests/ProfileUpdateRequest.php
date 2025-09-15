@@ -17,6 +17,12 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
+            'npm' => ['nullable', 'string', 'max:255'],
+            'fakultas' => ['nullable', 'string', 'max:255'],
+            'prodi' => ['nullable', 'string', 'max:255'],
+            'angkatan' => ['nullable', 'string', 'max:255'],
+            'nomor_telpon' => ['nullable', 'string', 'max:255'],
+            'profile_photo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'email' => [
                 'required',
                 'string',
