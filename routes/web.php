@@ -9,6 +9,7 @@ use App\Http\Controllers\TridharmaController;
 use App\Http\Controllers\LombaController;
 use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\UkmController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -73,6 +74,16 @@ Route::resource('lomba', LombaController::class)->names([
     'update' => 'lomba.update',
     'destroy' => 'lomba.destroy'
 ]);
+
+Route::resource('ukm', UkmController::class)->names([
+    'index' => 'ukm.index',
+    'create' => 'ukm.create',
+    'store' => 'ukm.store',
+    'show' => 'ukm.show',
+    'edit' => 'ukm.edit',
+    'update' => 'ukm.update',
+    'destroy' => 'ukm.destroy',
+    ]);
 
 Route::resource('fakultas', FakultasController::class)->names([
     'index' => 'fakultas',

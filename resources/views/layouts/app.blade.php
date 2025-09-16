@@ -56,10 +56,10 @@
         
         deleteForms.forEach(form => {
             form.addEventListener('submit', function (event) {
-                event.preventDefault(); // Mencegah form dikirimkan secara langsung
+                event.preventDefault();
 
                 Swal.fire({
-                    title: 'Apakah Anda yakin?',
+                    title: 'Apakah Anda yakin untuk menghapus?',
                     text: "Data ini tidak dapat dikembalikan!",
                     icon: 'warning',
                     showCancelButton: true,
@@ -69,7 +69,7 @@
                     cancelButtonText: 'Batal'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        this.submit(); // Mengirimkan form jika pengguna mengonfirmasi
+                        this.submit();
                     }
                 });
             });

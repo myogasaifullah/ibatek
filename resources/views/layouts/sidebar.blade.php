@@ -30,7 +30,8 @@
                 str_starts_with(Route::currentRouteName(), 'kepanitiaan') ||
                 str_starts_with(Route::currentRouteName(), 'magang') ||
                 str_starts_with(Route::currentRouteName(), 'tridharma') ||
-                str_starts_with(Route::currentRouteName(), 'lomba');
+                str_starts_with(Route::currentRouteName(), 'lomba') ||
+                str_starts_with(Route::currentRouteName(), 'ukm');
                 @endphp
                 <li class="sidebar-item has-sub {{ $isKegiatanActive ? 'active' : '' }}">
                     <a href="#" class='sidebar-link'>
@@ -52,6 +53,9 @@
                         </li>
                         <li class="submenu-item {{ str_starts_with(Route::currentRouteName(), 'lomba') ? 'active' : '' }}">
                             <a href="{{ route('lomba') }}">Lomba</a>
+                        </li>
+                        <li class="submenu-item {{ str_starts_with(Route::currentRouteName(), 'ukm') ? 'active' : '' }}">
+                            <a href="{{ route('ukm.index') }}">UKM</a>
                         </li>
                     </ul>
                 </li>
