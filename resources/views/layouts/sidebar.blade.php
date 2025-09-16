@@ -105,7 +105,7 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item {{ Route::currentRouteName() == 'kesimpulan' ? 'active' : '' }}">
+                <li class="sidebar-item {{ Route::currentRouteName() == 'laporan' ? 'active' : '' }}">
                     <a href="{{ route('kesimpulan') }}" class='sidebar-link'>
                         <i class="bi bi-map-fill"></i>
                         <span>Laporan</span>
