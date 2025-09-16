@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Ibatek || Sistem Kendali Mahasiswa Beasiswa')
-@section('page-heading', 'File Upload')
+@section('title', 'File Uploader')
+@section('page-heading', 'File Uploader')
 
 @section('content')
 

@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Ibatek || Sistem Kendali Mahasiswa Beasiswa')
+@section('title', 'Laporan')
 @section('page-heading', 'Laporan')
-
 @section('content')
 
 @endsection

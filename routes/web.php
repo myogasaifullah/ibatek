@@ -10,6 +10,7 @@ use App\Http\Controllers\LombaController;
 use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\UkmController;
+use App\Http\Controllers\KegiatanController;
 
 Route::get('/', function () {
     return view('welcome');
