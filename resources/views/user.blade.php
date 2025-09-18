@@ -232,6 +232,7 @@
                 $('#editAngkatan').val(data.angkatan);
                 $('#editNomorTelpon').val(data.nomor_telpon);
                 $('#editEmail').val(data.email);
+                $('#editRole').val(data.role);
                 // Clear password fields on edit
                 $('#editPassword').val('');
                 $('#editPasswordConfirmation').val('');

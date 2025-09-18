@@ -108,9 +108,19 @@ Route::resource('prodi', ProdiController::class)->names([
     'destroy' => 'prodi.destroy'
 ]);
 
-Route::get('/upload', function () {
-    return view('upload');
-})->name('upload');
+Route::get('/upload', [\App\Http\Controllers\RelatedRecordController::class, 'index'])->name('upload');
+
+Route::resource('related-records', \App\Http\Controllers\RelatedRecordController::class)->names([
+    'index' => 'related-records.index',
+    'create' => 'related-records.create',
+    'store' => 'related-records.store',
+    'show' => 'related-records.show',
+    'edit' => 'related-records.edit',
+    'update' => 'related-records.update',
+    'destroy' => 'related-records.destroy'
+]);
+
+Route::post('related-records/{id}/verify', [\App\Http\Controllers\RelatedRecordController::class, 'verify'])->name('related-records.verify');
 
 Route::get('/kesimpulan', function () {
     return view('kesimpulan');

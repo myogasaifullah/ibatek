@@ -1,3 +1,0 @@
-- [x] Fix AdminController::index() to pass $users correctly
-- [x] Update routes/web.php to rename 'admins' routes to 'admin.*'
-- [x] Update admin.blade.php to use 'admin.*' routes and add 'client' role option
