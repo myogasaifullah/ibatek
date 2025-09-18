@@ -42,8 +42,11 @@ class RelatedRecordController extends Controller
         $lombas = Lomba::all();
         $ukms = Ukm::all();
 
+        $user = auth()->user();
+        $relatedRecords = RelatedRecord::where('user_id', $user->id)->with(['organization', 'kepaniitiaan', 'magang', 'tridharma', 'lomba', 'ukm'])->get();
+
         return view('related-records.create', compact(
-            'organizations', 'kepaniitiaans', 'magangs', 'tridharmas', 'lombas', 'ukms'
+            'organizations', 'kepaniitiaans', 'magangs', 'tridharmas', 'lombas', 'ukms', 'relatedRecords'
         ));
     }
 
@@ -103,8 +106,11 @@ class RelatedRecordController extends Controller
         $lombas = Lomba::all();
         $ukms = Ukm::all();
 
+        $user = auth()->user();
+        $relatedRecords = RelatedRecord::where('user_id', $user->id)->with(['organization', 'kepaniitiaan', 'magang', 'tridharma', 'lomba', 'ukm'])->get();
+
         return view('related-records.edit', compact(
-            'relatedRecord', 'organizations', 'kepaniitiaans', 'magangs', 'tridharmas', 'lombas', 'ukms'
+            'relatedRecord', 'organizations', 'kepaniitiaans', 'magangs', 'tridharmas', 'lombas', 'ukms', 'relatedRecords'
         ));
     }
 

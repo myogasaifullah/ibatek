@@ -9,6 +9,21 @@
         @csrf
         @method('PUT')
 
+        <!-- Semester Select for Display -->
+        <div class="form-group mb-3">
+            <label for="display_semester">Display Records for Semester</label>
+            <select id="display_semester" class="form-control">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+            </select>
+        </div>
+
         <!-- Horizontal Navigation Tabs -->
         <ul class="nav nav-tabs" id="formTabs" role="tablist">
             <li class="nav-item" role="presentation">
@@ -46,6 +61,16 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="mt-3">
+                    <h6>Organisasi</h6>
+                    <div id="organization-records">
+                        @foreach($relatedRecords->whereNotNull('organization_id') as $record)
+                            <div class="record-item" data-semester="{{ $record->semester }}" style="display: none;">
+                                {{ $record->organization->name }} - Semester {{ $record->semester }}
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
             <div class="tab-pane fade" id="kepaniitiaan" role="tabpanel">
                 <div class="form-group">
@@ -56,6 +81,16 @@
                             <option value="{{ $kep->id }}" {{ $relatedRecord->kepaniitiaan_id == $kep->id ? 'selected' : '' }}>{{ $kep->name }}</option>
                         @endforeach
                     </select>
+                </div>
+                <div class="mt-3">
+                    <h6>Kepaniitiaan</h6>
+                    <div id="kepaniitiaan-records">
+                        @foreach($relatedRecords->whereNotNull('kepaniitiaan_id') as $record)
+                            <div class="record-item" data-semester="{{ $record->semester }}" style="display: none;">
+                                {{ $record->kepaniitiaan->name }} - Semester {{ $record->semester }}
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="magang" role="tabpanel">
@@ -68,6 +103,16 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="mt-3">
+                    <h6>Your Magang Records for Selected Semester</h6>
+                    <div id="magang-records">
+                        @foreach($relatedRecords->whereNotNull('magang_id') as $record)
+                            <div class="record-item" data-semester="{{ $record->semester }}" style="display: none;">
+                                {{ $record->magang->company_name }} - Semester {{ $record->semester }}
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
             <div class="tab-pane fade" id="tridharma" role="tabpanel">
                 <div class="form-group">
@@ -78,6 +123,16 @@
                             <option value="{{ $tri->id }}" {{ $relatedRecord->tridharma_id == $tri->id ? 'selected' : '' }}>{{ $tri->title }}</option>
                         @endforeach
                     </select>
+                </div>
+                <div class="mt-3">
+                    <h6>Tridharma</h6>
+                    <div id="tridharma-records">
+                        @foreach($relatedRecords->whereNotNull('tridharma_id') as $record)
+                            <div class="record-item" data-semester="{{ $record->semester }}" style="display: none;">
+                                {{ $record->tridharma->title }} - Semester {{ $record->semester }}
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="lomba" role="tabpanel">
@@ -90,6 +145,16 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="mt-3">
+                    <h6>Lomba</h6>
+                    <div id="lomba-records">
+                        @foreach($relatedRecords->whereNotNull('lomba_id') as $record)
+                            <div class="record-item" data-semester="{{ $record->semester }}" style="display: none;">
+                                {{ $record->lomba->title }} - Semester {{ $record->semester }}
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
             <div class="tab-pane fade" id="ukm" role="tabpanel">
                 <div class="form-group">
@@ -100,6 +165,16 @@
                             <option value="{{ $ukm->id }}" {{ $relatedRecord->ukm_id == $ukm->id ? 'selected' : '' }}>{{ $ukm->name }}</option>
                         @endforeach
                     </select>
+                </div>
+                <div class="mt-3">
+                    <h6>UKM</h6>
+                    <div id="ukm-records">
+                        @foreach($relatedRecords->whereNotNull('ukm_id') as $record)
+                            <div class="record-item" data-semester="{{ $record->semester }}" style="display: none;">
+                                {{ $record->ukm->name }} - Semester {{ $record->semester }}
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="bukti" role="tabpanel">
@@ -113,8 +188,18 @@
             </div>
         </div>
         <div class="form-group mt-3">
-            <label for="semester">Semester (1-8)</label>
-            <input type="number" name="semester" id="semester" class="form-control" min="1" max="8" value="{{ old('semester', $relatedRecord->semester) }}">
+            <label for="semester">Semester</label>
+            <select name="semester" id="semester" class="form-control">
+                <option value="">Select Semester</option>
+                <option value="1" {{ old('semester', $relatedRecord->semester) == '1' ? 'selected' : '' }}>1</option>
+                <option value="2" {{ old('semester', $relatedRecord->semester) == '2' ? 'selected' : '' }}>2</option>
+                <option value="3" {{ old('semester', $relatedRecord->semester) == '3' ? 'selected' : '' }}>3</option>
+                <option value="4" {{ old('semester', $relatedRecord->semester) == '4' ? 'selected' : '' }}>4</option>
+                <option value="5" {{ old('semester', $relatedRecord->semester) == '5' ? 'selected' : '' }}>5</option>
+                <option value="6" {{ old('semester', $relatedRecord->semester) == '5' ? 'selected' : '' }}>6</option>
+                <option value="7" {{ old('semester', $relatedRecord->semester) == '5' ? 'selected' : '' }}>7</option>
+                <option value="8" {{ old('semester', $relatedRecord->semester) == '5' ? 'selected' : '' }}>8</option>
+            </select>
         </div>
         <div class="form-group mt-3">
             <label for="durasi">Durasi (menit)</label>
@@ -129,7 +214,21 @@
 </div>
 
 <script>
-    // Optional: Add navigation buttons if needed
-    // For now, using Bootstrap tabs for horizontal navigation
+    document.getElementById('display_semester').addEventListener('change', function() {
+        var semester = this.value;
+        var items = document.querySelectorAll('.record-item');
+        items.forEach(function(item) {
+            if (item.getAttribute('data-semester') == semester) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+
+    // Trigger on load for default
+    window.addEventListener('load', function() {
+        document.getElementById('display_semester').dispatchEvent(new Event('change'));
+    });
 </script>
 @endsection
