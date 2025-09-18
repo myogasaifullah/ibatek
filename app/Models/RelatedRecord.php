@@ -17,6 +17,8 @@ class RelatedRecord extends Model
         'fakultas_id',
         'prodi_id',
         'ukm_id',
+        'semester',
+        'durasi',
         'bukti_file',
         'is_verified',
         'verified_by',

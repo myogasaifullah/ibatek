@@ -40,6 +40,12 @@
             @if($record->ukm_id)
                 <p><strong>UKM:</strong> {{ $record->ukm->name ?? '-' }}</p>
             @endif
+            @if($record->semester)
+                <p><strong>Semester:</strong> {{ $record->semester ?? '-' }}</p>
+            @endif
+            @if($record->durasi)
+                <p><strong>Durasi:</strong> {{ $record->durasi ?? '-' }} <strong>Menit</strong></p>
+            @endif
             
             @if($record->bukti_file)
                 <p><strong>Bukti File:</strong> <a href="{{ Storage::url($record->bukti_file) }}" target="_blank">View File</a></p>

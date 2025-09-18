@@ -112,6 +112,14 @@
                 </div>
             </div>
         </div>
+        <div class="form-group mt-3">
+            <label for="semester">Semester (1-8)</label>
+            <input type="number" name="semester" id="semester" class="form-control" min="1" max="8" value="{{ old('semester', $relatedRecord->semester) }}">
+        </div>
+        <div class="form-group mt-3">
+            <label for="durasi">Durasi (menit)</label>
+            <input type="number" name="durasi" id="durasi" class="form-control" min="0" value="{{ old('durasi', $relatedRecord->durasi) }}">
+        </div>
 
         <div class="mt-3">
             <button type="submit" class="btn btn-primary">Update</button>

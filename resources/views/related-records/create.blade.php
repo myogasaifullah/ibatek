@@ -28,9 +28,7 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="ukm-tab" data-bs-toggle="tab" data-bs-target="#ukm" type="button" role="tab">UKM</button>
             </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="bukti-tab" data-bs-toggle="tab" data-bs-target="#bukti" type="button" role="tab">Bukti</button>
-            </li>
+            
         </ul>
 
         <!-- Tab Content -->
@@ -101,12 +99,21 @@
                     </select>
                 </div>
             </div>
-            <div class="tab-pane fade" id="bukti" role="tabpanel">
-                <div class="form-group">
+            
+        </div>
+        <div class="form-group mt-3">
+                
                     <label for="bukti_file">Upload Bukti (PDF, JPG, PNG, max 2MB)</label>
-                    <input type="file" name="bukti_file" id="bukti_file" class="form-control" accept=".pdf,.jpg,.jpeg,.png">
-                </div>
+                    <input type="file" name="bukti_file" id="bukti_file" class="form-control" min="1" max="8" accept=".pdf,.jpg,.jpeg,.png">
+                
             </div>
+        <div class="form-group mt-3">
+            <label for="semester">Semester (1-8)</label>
+            <input type="number" name="semester" id="semester" class="form-control" min="1" max="8" value="{{ old('semester') }}">
+        </div>
+        <div class="form-group mt-3">
+            <label for="durasi">Durasi (menit)</label>
+            <input type="number" name="durasi" id="durasi" class="form-control" min="0" value="{{ old('durasi') }}">
         </div>
 
         <div class="mt-3">
