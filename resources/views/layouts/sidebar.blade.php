@@ -23,6 +23,13 @@
                     </a>
                 </li>
 
+                <li class="sidebar-item {{ Route::currentRouteName() == 'verifikasi' ? 'active' : '' }}">
+                    <a href="{{ route('verifikasi') }}" class='sidebar-link'>
+                        <i class="bi bi-check2-square"></i>
+                        <span>Verifikasi</span>
+                    </a>
+                </li>
+
                 <li class="sidebar-title">Admin &amp; Data</li>
 
                 @php
@@ -102,21 +109,22 @@
                 <li class="sidebar-title">User</li>
 
 
-                <li class="sidebar-item {{ Route::currentRouteName() == 'upload' ? 'active' : '' }}">
-                    <a href="{{ route('upload') }}" class='sidebar-link'>
+                <li class="sidebar-item {{ Route::currentRouteName() == 'related-records.create' ? 'active' : '' }}">
+                    <a href="{{ route('related-records.create') }}" class='sidebar-link'>
                         <i class="bi bi-cloud-arrow-up-fill"></i>
                         <span>File Uploader</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item {{ Route::currentRouteName() == 'laporan' ? 'active' : '' }}">
-                    <a href="{{ route('kesimpulan') }}" class='sidebar-link'>
+                <li class="sidebar-item {{ Route::currentRouteName() == 'upload' ? 'active' : '' }}">
+                    <a href="{{ route('upload') }}" class='sidebar-link'>
                         <i class="bi bi-map-fill"></i>
-                        <span>Laporan</span>
+                        <span>Cetak</span>
                     </a>
 
                 </li>
 
+                
                 <li class="sidebar-title">Pages</li>
 
                 <li class="sidebar-item {{ Route::currentRouteName() == 'profile.edit' ? 'active' : '' }}">

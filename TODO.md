@@ -1,0 +1,3 @@
+- [x] Create VerifikasiController with index method
+- [x] Update routes/web.php to use VerifikasiController@index
+- [x] Update verifikasi.blade.php with content from upload.blade.php

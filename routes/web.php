@@ -11,10 +11,13 @@ use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\UkmController;
 use App\Http\Controllers\KegiatanController;
+use App\Http\Controllers\VerifikasiController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/verifikasi', [VerifikasiController::class, 'index'])->name('verifikasi');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
