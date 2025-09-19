@@ -23,11 +23,11 @@ class RelatedRecordController extends Controller
      */
     public function index()
     {
-        $relatedRecords = RelatedRecord::with([
+        $relatedRecords = RelatedRecord::where('user_id', auth()->id())->with([
             'user', 'organization', 'kepaniitiaan', 'magang', 'tridharma', 'lomba', 'fakultas', 'prodi', 'ukm', 'verifiedBy'
         ])->get();
 
-        return view('upload', compact('relatedRecords'));
+        return view('cetak', compact('relatedRecords'));
     }
 
     /**

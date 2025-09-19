@@ -23,14 +23,14 @@
                     </a>
                 </li>
 
+
+                <li class="sidebar-title">Admin &amp; Data</li>
                 <li class="sidebar-item {{ Route::currentRouteName() == 'verifikasi' ? 'active' : '' }}">
                     <a href="{{ route('verifikasi') }}" class='sidebar-link'>
                         <i class="bi bi-check2-square"></i>
                         <span>Verifikasi</span>
                     </a>
                 </li>
-
-                <li class="sidebar-title">Admin &amp; Data</li>
 
                 @php
                 $isKegiatanActive = str_starts_with(Route::currentRouteName(), 'organisasi') ||
@@ -116,15 +116,15 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item {{ Route::currentRouteName() == 'upload' ? 'active' : '' }}">
-                    <a href="{{ route('upload') }}" class='sidebar-link'>
+                <li class="sidebar-item {{ Route::currentRouteName() == 'cetak' ? 'active' : '' }}">
+                    <a href="{{ route('cetak') }}" class='sidebar-link'>
                         <i class="bi bi-map-fill"></i>
                         <span>Cetak</span>
                     </a>
 
                 </li>
 
-                
+
                 <li class="sidebar-title">Pages</li>
 
                 <li class="sidebar-item {{ Route::currentRouteName() == 'profile.edit' ? 'active' : '' }}">
@@ -134,7 +134,7 @@
                     </a>
                 </li>
 
-                               <li class="sidebar-item">
+                <li class="sidebar-item">
                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
                         @csrf
                         <a href="#" class="sidebar-link"

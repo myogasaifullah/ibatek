@@ -111,7 +111,7 @@ Route::resource('prodi', ProdiController::class)->names([
     'destroy' => 'prodi.destroy'
 ]);
 
-Route::get('/upload', [\App\Http\Controllers\RelatedRecordController::class, 'index'])->name('upload');
+Route::get('/cetak', [\App\Http\Controllers\RelatedRecordController::class, 'index'])->name('cetak');
 
 Route::resource('related-records', \App\Http\Controllers\RelatedRecordController::class)->names([
     'index' => 'related-records.index',
