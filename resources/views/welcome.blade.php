@@ -16,7 +16,7 @@
   <!-- ===============================================-->
   <!--    Favicons-->
   <!-- ===============================================-->
-  <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/favicon.jpg">
+  <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/logo/ibtk.png">
 
 
   <!-- ===============================================-->

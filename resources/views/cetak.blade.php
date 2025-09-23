@@ -67,7 +67,7 @@
                                                 <option value="8">Semester 8</option>
                                             </select>
                                         </div>
-                                        <button type="submit" class="btn btn-sm btn-outline-primary mb-1">
+                                        <button type="submit" class="btn btn-info btn-sm mb-1">
                                             <i class="fas fa-filter"></i> Apply Filters
                                         </button>
                                     </form>

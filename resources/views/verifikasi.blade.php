@@ -142,17 +142,25 @@
                                         method="POST" class="d-inline delete-form">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-outline-danger" 
-                                                onclick="return confirm('Yakin ingin menghapus data ini?')">
-                                            Hapus
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                                            Tolak
                                         </button>
                                     </form>
+                                    @if(!$record->is_verified)
+                                        <form action="{{ route('related-records.verify', $record->id) }}" 
+                                            method="POST" class="d-inline">
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm btn-outline-success">
+                                                Terima
+                                            </button>
+                                        </form>
+                                    @endif
 
                                     {{-- Tombol View --}}
-                                    <button type="button" class="btn btn-sm btn-outline-info view-details" 
+                                    {{-- <button type="button" class="btn btn-sm btn-outline-info view-details" 
                                             data-record-id="{{ $record->id }}">
                                         View
-                                    </button>
+                                    </button> --}}
                                 </div>
                             </td>
                         </tr>
@@ -268,23 +276,10 @@
 </style>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Confirm deletion
-        document.querySelectorAll('.delete-form').forEach(form => {
-            form.addEventListener('submit', function(e) {
-                if (!confirm('Are you sure you want to delete this record?')) {
-                    e.preventDefault();
-                }
-            });
-        });
-
         // View details functionality
         document.querySelectorAll('.view-details').forEach(button => {
             button.addEventListener('click', function() {
                 const recordId = this.getAttribute('data-record-id');
-                
-                // In a real application, you would fetch this data from the server
-                // For this example, we'll use a simple approach
                 const row = this.closest('tr');
                 const cells = row.querySelectorAll('td');
                 
