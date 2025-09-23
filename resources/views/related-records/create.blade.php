@@ -6,7 +6,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-8 mx-auto">
             <!-- Form Section -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex justify-content-between align-items-center">
@@ -20,23 +20,7 @@
                 <div class="card-body">
                     <form action="{{ route('related-records.store') }}" method="POST" enctype="multipart/form-data" id="recordForm">
                         @csrf
-
-                        <!-- Semester Filter -->
-                        <div class="row mb-4">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="display_semester" class="font-weight-bold">Filter Records by Semester</label>
-                                    <select id="display_semester" class="form-control">
-                                        <option value="all">All Semesters</option>
-                                        @for($i = 1; $i <= 8; $i++)
-                                            <option value="{{ $i }}">Semester {{ $i }}</option>
-                                        @endfor
-                                    </select>
-                                    <small class="form-text text-muted">Filter existing records to avoid duplicates</small>
-                                </div>
-                            </div>
-                        </div>
-
+                        
                         <!-- Record Type Selection -->
                         <div class="row mb-4">
                             <div class="col-md-12">
@@ -61,8 +45,12 @@
                                         <i class="fas fa-icons me-1"></i> UKM
                                     </button>
                                 </div>
+                            </div>
+                        </div>
 
-                                <!-- Record Selection Fields -->
+                        <!-- Record Selection Fields -->
+                        <div class="row mb-4">
+                            <div class="col-md-12">
                                 <div class="record-selection" id="organization-selection">
                                     <label for="organization_id">Select Organization</label>
                                     <select name="organization_id" id="organization_id" class="form-control">
@@ -174,7 +162,7 @@
                 </div>
             </div>
         </div>
-
+        
         <div class="col-lg-4">
             <!-- Existing Records Summary -->
             <div class="card shadow mb-4">
@@ -233,9 +221,6 @@
                             </tbody>
                         </table>
                     </div>
-                    
-                    <!-- Statistics Card -->
-                    
                 </div>
             </div>
         </div>
@@ -256,12 +241,12 @@
         transition: all 0.2s;
     }
     .record-type-btn.active, .record-type-btn:hover {
-        background-color: #4e73df;
+        background-color: #ff9900;
         color: white;
-        border-color: #4e73df;
+        border-color: #fcbe62;;
     }
     .record-selection {
-        border-left: 3px solid #4e73df;
+        border-left: 3px solid #ff9900;;
         padding: 15px;
         background-color: #f8f9fc;
         border-radius: 0.35rem;

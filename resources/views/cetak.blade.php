@@ -29,11 +29,11 @@
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                    <div class="text-warning font-weight-bold text-info text-uppercase mb-3">
                                         Report Filters
                                     </div>
-                                    <form class="form-inline">
-                                        <div class="form-group mr-2 mb-2">
+                                    <form class="form-label text-warning">
+                                        <div class="form-label text-warning">
                                             <label for="verifiedStatus" class="sr-only">Verification Status</label>
                                             <select class="form-control form-control-sm" id="verifiedStatus">
                                                 <option value="">All Verification Status</option>
@@ -41,32 +41,33 @@
                                                 <option value="not_verified">Not Verified Only</option>
                                             </select>
                                         </div>
-                                        <div class="form-group mr-2 mb-2">
+                                        <div class="form-label text-warning">
                                             <label for="recordType" class="sr-only">Record Type</label>
                                             <select class="form-control form-control-sm" id="recordType">
                                                 <option value="">All Record Types</option>
                                                 <option value="organization">Organization</option>
-                                                <option value="kepanitiaan">Kepanitiaan</option>
+                                                <option value="kepaniitiaan">Kepanitiaan</option>
                                                 <option value="magang">Magang</option>
                                                 <option value="tridharma">Tridharma</option>
                                                 <option value="lomba">Lomba</option>
+                                                <option value="ukm">UKM</option>
                                             </select>
                                         </div>
-                                        <div class="form-group mr-2 mb-2">
+                                        <div class="form-label text-warning">
                                             <label for="semesterFilter" class="sr-only">Semester</label>
                                             <select class="form-control form-control-sm" id="semesterFilter">
                                                 <option value="">All Semesters</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
+                                                <option value="1">Semester 1</option>
+                                                <option value="2">Semester 2</option>
+                                                <option value="3">Semester 3</option>
+                                                <option value="4">Semester 4</option>
+                                                <option value="5">Semester 5</option>
+                                                <option value="6">Semester 6</option>
+                                                <option value="7">Semester 7</option>
+                                                <option value="8">Semester 8</option>
                                             </select>
                                         </div>
-                                        <button type="submit" class="btn btn-info btn-sm mb-2">
+                                        <button type="submit" class="btn btn-sm btn-outline-primary mb-1">
                                             <i class="fas fa-filter"></i> Apply Filters
                                         </button>
                                     </form>
@@ -139,34 +140,44 @@
                                 <span class="badge {{ $record->is_verified ? 'badge-success' : 'badge-warning' }}">
                                     {{ $record->is_verified ? 'Verified' : 'Pending' }}
                                 </span>
-                                @if($record->verified_by)
+                                {{-- @if($record->verified_by)
                                     <br><small>By: {{ $record->verifiedBy->name ?? '-' }}</small>
-                                @endif
+                                @endif --}}
                             </td>
                             <td>
-                                <div class="btn-group" role="group">
+                                <div class="d-flex gap-1"> {{-- flexbox dengan jarak antar tombol --}}
+                                    {{-- Tombol Edit --}}
                                     <a href="{{ route('related-records.edit', $record->id) }}" 
-                                       class="btn btn-sm btn-outline-primary" title="Edit">
-                                        <i class="fas fa-edit"></i>
+                                    class="btn btn-sm btn-outline-primary">
+                                        Edit
                                     </a>
-                                    <form action="{{ route('related-records.destroy', $record->id) }}" method="POST" class="d-inline delete-form">
+
+                                    {{-- Tombol Hapus --}}
+                                    <form action="{{ route('related-records.destroy', $record->id) }}" 
+                                        method="POST" class="d-inline delete-form">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete">
-                                            <i class="fas fa-trash"></i>
+                                        <button type="submit" class="btn btn-sm btn-outline-danger"
+                                                onclick="return confirm('Yakin ingin menghapus data ini?')">
+                                            Hapus
                                         </button>
                                     </form>
+
+                                    {{-- Tombol Verify (hanya muncul kalau belum diverifikasi) --}}
                                     @if(!$record->is_verified)
-                                        <form action="{{ route('related-records.verify', $record->id) }}" method="POST" class="d-inline">
+                                        <form action="{{ route('related-records.verify', $record->id) }}" 
+                                            method="POST" class="d-inline">
                                             @csrf
-                                            <button type="submit" class="btn btn-sm btn-outline-success" title="Verify">
-                                                <i class="fas fa-check"></i>
+                                            <button type="submit" class="btn btn-sm btn-outline-success">
+                                                Verify
                                             </button>
                                         </form>
                                     @endif
+
+                                    {{-- Tombol View --}}
                                     <button type="button" class="btn btn-sm btn-outline-info view-details" 
-                                            data-record-id="{{ $record->id }}" title="View Details">
-                                        <i class="fas fa-eye"></i>
+                                            data-record-id="{{ $record->id }}">
+                                        View
                                     </button>
                                 </div>
                             </td>
@@ -200,36 +211,89 @@
 </div>
 
 <style>
-    .card {
-        border: 1px solid #e3e6f0;
-        border-radius: 0.35rem;
-    }
-    .table th {
-        border-top: 1px solid #e3e6f0;
-    }
-    .badge {
-        font-size: 0.75rem;
-        padding: 0.35em 0.65em;
-    }
-    .btn-group .btn {
-        border-radius: 0.35rem;
-        margin-right: 0.25rem;
-    }
-    #recordsTable {
-        font-size: 0.875rem;
-    }
-    @media print {
-        .btn, .form-inline, .card-header .btn {
-            display: none !important;
-        }
-        .card-header {
-            display: flex;
-            justify-content: center;
-        }
-        .table-responsive {
-            overflow: visible;
-        }
-    }
+    .card-header {
+    background: linear-gradient(90deg, #ffffff, #ffc400);
+    color: #fff !important;
+    border: none;
+    border-radius: 0.5rem 0.5rem 0 0;
+    padding: 1rem 1.5rem;
+}
+
+.card-header h6 {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.btn {
+    border-radius: 30px;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+#filterCard {
+    border: none;
+    border-radius: 0.75rem;
+    background: #f8f9fc;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 1.5rem;
+}
+
+#filterCard .form-control {
+    border-radius: 0.5rem;
+    border: 1px solid #d1d3e2;
+    font-size: 0.9rem;
+}
+
+.table {
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+.table thead {
+    background: #ffc400;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.table tbody tr:hover {
+    background: #f1f3f9;
+    cursor: pointer;
+}
+
+.badge-success {
+    background: #28a7451a;
+    color: #28a745;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.badge-warning {
+    background: #ffc1071a;
+    color: #ffc107;
+    border-radius: 20px;
+    font-weight: 500;
+}
+.modal-content {
+    border-radius: 0.75rem;
+    border: none;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+    background: #ffae00;
+    color: #fff;
+    border-radius: 0.75rem 0.75rem 0 0;
+}
+.btn-xs {
+    padding: 2px 6px;
+    font-size: 0.7rem;
+    line-height: 1.2;
+}
 </style>
 
 <script>
