@@ -74,9 +74,9 @@
             </div>
             <div class="tab-pane fade" id="kepaniitiaan" role="tabpanel">
                 <div class="form-group">
-                    <label for="kepaniitiaan_id">Kepaniitiaan</label>
+                    <label for="kepaniitiaan_id">Kepanitiaan</label>
                     <select name="kepaniitiaan_id" id="kepaniitiaan_id" class="form-control">
-                        <option value="">Select Kepaniitiaan</option>
+                        <option value="">Select Kepanitiaan</option>
                         @foreach($kepaniitiaans as $kep)
                             <option value="{{ $kep->id }}" {{ $relatedRecord->kepaniitiaan_id == $kep->id ? 'selected' : '' }}>{{ $kep->name }}</option>
                         @endforeach

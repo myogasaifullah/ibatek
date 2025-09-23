@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSemesterAndDurasiToRelatedRecordsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,6 @@ class AddSemesterAndDurasiToRelatedRecordsTable extends Migration
     {
         Schema::table('related_records', function (Blueprint $table) {
             $table->integer('semester')->nullable()->after('ukm_id');
-            $table->integer('durasi')->nullable()->after('semester');
         });
     }
 
@@ -23,7 +22,7 @@ class AddSemesterAndDurasiToRelatedRecordsTable extends Migration
     public function down(): void
     {
         Schema::table('related_records', function (Blueprint $table) {
-            $table->dropColumn(['semester', 'durasi']);
+            $table->dropColumn('semester');
         });
     }
-}
+};
