@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Related Record')
-@section('page-heading', 'Edit Related Record')
+@section('title', 'Edit Catatan')
+@section('page-heading', 'Edit Catatan')
 
 @section('content')
 <div class="container">
@@ -11,26 +11,26 @@
 
         <!-- Semester Select for Display -->
         <div class="form-group mb-3">
-            <label for="display_semester">Display Records for Semester</label>
+            <label for="display_semester">Pilih Semester</label>
             <select id="display_semester" class="form-control">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
+                <option value="3">Semester 3</option>
+                <option value="4">Semester 4</option>
+                <option value="5">Semester 5</option>
+                <option value="6">Semester 6</option>
+                <option value="7">Semester 7</option>
+                <option value="8">Semester 8</option>
             </select>
         </div>
 
         <!-- Horizontal Navigation Tabs -->
         <ul class="nav nav-tabs" id="formTabs" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="organization-tab" data-bs-toggle="tab" data-bs-target="#organization" type="button" role="tab">Organization</button>
+                <button class="nav-link active" id="organization-tab" data-bs-toggle="tab" data-bs-target="#organization" type="button" role="tab">Organisasi</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="kepaniitiaan-tab" data-bs-toggle="tab" data-bs-target="#kepaniitiaan" type="button" role="tab">Kepaniitiaan</button>
+                <button class="nav-link" id="kepaniitiaan-tab" data-bs-toggle="tab" data-bs-target="#kepaniitiaan" type="button" role="tab">Kepanitiaan</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="magang-tab" data-bs-toggle="tab" data-bs-target="#magang" type="button" role="tab">Magang</button>
@@ -53,9 +53,9 @@
         <div class="tab-content mt-3" id="formTabsContent">
             <div class="tab-pane fade show active" id="organization" role="tabpanel">
                 <div class="form-group">
-                    <label for="organization_id">Organization</label>
+                    <label for="organization_id">Organisasi</label>
                     <select name="organization_id" id="organization_id" class="form-control">
-                        <option value="">Select Organization</option>
+                        <option value="">Pilih Organisasi</option>
                         @foreach($organizations as $org)
                             <option value="{{ $org->id }}" {{ $relatedRecord->organization_id == $org->id ? 'selected' : '' }}>{{ $org->name }}</option>
                         @endforeach
@@ -76,14 +76,14 @@
                 <div class="form-group">
                     <label for="kepaniitiaan_id">Kepanitiaan</label>
                     <select name="kepaniitiaan_id" id="kepaniitiaan_id" class="form-control">
-                        <option value="">Select Kepanitiaan</option>
+                        <option value="">Pilih Kepanitiaan</option>
                         @foreach($kepaniitiaans as $kep)
                             <option value="{{ $kep->id }}" {{ $relatedRecord->kepaniitiaan_id == $kep->id ? 'selected' : '' }}>{{ $kep->name }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="mt-3">
-                    <h6>Kepaniitiaan</h6>
+                    <h6>Kepanitiaan</h6>
                     <div id="kepaniitiaan-records">
                         @foreach($relatedRecords->whereNotNull('kepaniitiaan_id') as $record)
                             <div class="record-item" data-semester="{{ $record->semester }}" style="display: none;">
@@ -97,14 +97,14 @@
                 <div class="form-group">
                     <label for="magang_id">Magang</label>
                     <select name="magang_id" id="magang_id" class="form-control">
-                        <option value="">Select Magang</option>
+                        <option value="">Pilih Magang</option>
                         @foreach($magangs as $mag)
                             <option value="{{ $mag->id }}" {{ $relatedRecord->magang_id == $mag->id ? 'selected' : '' }}>{{ $mag->company_name }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="mt-3">
-                    <h6>Your Magang Records for Selected Semester</h6>
+                    <h6>Catatan Magang Anda untuk Semester Terpilih</h6>
                     <div id="magang-records">
                         @foreach($relatedRecords->whereNotNull('magang_id') as $record)
                             <div class="record-item" data-semester="{{ $record->semester }}" style="display: none;">
@@ -118,7 +118,7 @@
                 <div class="form-group">
                     <label for="tridharma_id">Tridharma</label>
                     <select name="tridharma_id" id="tridharma_id" class="form-control">
-                        <option value="">Select Tridharma</option>
+                        <option value="">Pilih Tridharma</option>
                         @foreach($tridharmas as $tri)
                             <option value="{{ $tri->id }}" {{ $relatedRecord->tridharma_id == $tri->id ? 'selected' : '' }}>{{ $tri->title }}</option>
                         @endforeach
@@ -139,7 +139,7 @@
                 <div class="form-group">
                     <label for="lomba_id">Lomba</label>
                     <select name="lomba_id" id="lomba_id" class="form-control">
-                        <option value="">Select Lomba</option>
+                        <option value="">Pilih Lomba</option>
                         @foreach($lombas as $lom)
                             <option value="{{ $lom->id }}" {{ $relatedRecord->lomba_id == $lom->id ? 'selected' : '' }}>{{ $lom->title }}</option>
                         @endforeach
@@ -160,7 +160,7 @@
                 <div class="form-group">
                     <label for="ukm_id">UKM</label>
                     <select name="ukm_id" id="ukm_id" class="form-control">
-                        <option value="">Select UKM</option>
+                        <option value="">Pilih UKM</option>
                         @foreach($ukms as $ukm)
                             <option value="{{ $ukm->id }}" {{ $relatedRecord->ukm_id == $ukm->id ? 'selected' : '' }}>{{ $ukm->name }}</option>
                         @endforeach

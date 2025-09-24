@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Create Related Record')
-@section('page-heading', 'Create New Related Record')
+@section('title', 'Tambah Kegiatan')
+@section('page-heading', 'Tambah Kegiatan')
 
 @section('content')
 <div class="container-fluid">
@@ -10,10 +10,10 @@
             <!-- Form Section -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                    <h6 class="m-0 font-weight-bold text-primary">Record Creation Form</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Form Tambah Kegiatan</h6>
                     <div>
                         <a href="{{ route('related-records.index') }}" class="btn btn-sm btn-secondary">
-                            <i class="fas fa-arrow-left me-1"></i> Back to Records
+                            <i class="fas fa-arrow-left me-1"></i> Kembali
                         </a>
                     </div>
                 </div>
@@ -24,10 +24,10 @@
                         <!-- Record Type Selection -->
                         <div class="row mb-4">
                             <div class="col-md-12">
-                                <h5 class="font-weight-bold mb-3">Select Record Type</h5>
+                                <h5 class="font-weight-bold mb-3">Tipe Kegiatan</h5>
                                 <div class="d-flex flex-wrap gap-2 mb-3">
                                     <button type="button" class="btn btn-outline-primary record-type-btn active" data-type="organization">
-                                        <i class="fas fa-building me-1"></i> Organization
+                                        <i class="fas fa-building me-1"></i> Organisasi
                                     </button>
                                     <button type="button" class="btn btn-outline-primary record-type-btn" data-type="kepaniitiaan">
                                         <i class="fas fa-users me-1"></i> Kepanitiaan
@@ -52,9 +52,9 @@
                         <div class="row mb-4">
                             <div class="col-md-12">
                                 <div class="record-selection" id="organization-selection">
-                                    <label for="organization_id">Select Organization</label>
+                                    <label for="organization_id">Jenis Organisasi</label>
                                     <select name="organization_id" id="organization_id" class="form-control">
-                                        <option value="">Select Organization</option>
+                                        <option value="">Jenis Organisasi</option>
                                         @foreach($organizations as $org)
                                         <option value="{{ $org->id }}">{{ $org->name }}</option>
                                         @endforeach
@@ -62,9 +62,9 @@
                                 </div>
 
                                 <div class="record-selection d-none" id="kepaniitiaan-selection">
-                                    <label for="kepaniitiaan_id">Select Kepanitiaan</label>
+                                    <label for="kepaniitiaan_id">Jenis Kepanitiaan</label>
                                     <select name="kepaniitiaan_id" id="kepaniitiaan_id" class="form-control">
-                                        <option value="">Select Kepanitiaan</option>
+                                        <option value="">Jenis Kepanitiaan</option>
                                         @foreach($kepaniitiaans as $kep)
                                         <option value="{{ $kep->id }}">{{ $kep->name }}</option>
                                         @endforeach
@@ -72,9 +72,9 @@
                                 </div>
 
                                 <div class="record-selection d-none" id="magang-selection">
-                                    <label for="magang_id">Select Magang</label>
+                                    <label for="magang_id">Jenis Magang</label>
                                     <select name="magang_id" id="magang_id" class="form-control">
-                                        <option value="">Select Magang</option>
+                                        <option value="">Jenis Magang</option>
                                         @foreach($magangs as $mag)
                                         <option value="{{ $mag->id }}">{{ $mag->company_name }}</option>
                                         @endforeach
@@ -82,9 +82,9 @@
                                 </div>
 
                                 <div class="record-selection d-none" id="tridharma-selection">
-                                    <label for="tridharma_id">Select Tridharma</label>
+                                    <label for="tridharma_id">Jenis Tridharma</label>
                                     <select name="tridharma_id" id="tridharma_id" class="form-control">
-                                        <option value="">Select Tridharma</option>
+                                        <option value="">Jenis Tridharma</option>
                                         @foreach($tridharmas as $tri)
                                         <option value="{{ $tri->id }}">{{ $tri->title }}</option>
                                         @endforeach
@@ -92,9 +92,9 @@
                                 </div>
 
                                 <div class="record-selection d-none" id="lomba-selection">
-                                    <label for="lomba_id">Select Lomba</label>
+                                    <label for="lomba_id">Jenis Lomba</label>
                                     <select name="lomba_id" id="lomba_id" class="form-control">
-                                        <option value="">Select Lomba</option>
+                                        <option value="">Jenis Lomba</option>
                                         @foreach($lombas as $lom)
                                         <option value="{{ $lom->id }}">{{ $lom->title }}</option>
                                         @endforeach
@@ -102,9 +102,9 @@
                                 </div>
 
                                 <div class="record-selection d-none" id="ukm-selection">
-                                    <label for="ukm_id">Select UKM</label>
+                                    <label for="ukm_id">Jenis UKM</label>
                                     <select name="ukm_id" id="ukm_id" class="form-control">
-                                        <option value="">Select UKM</option>
+                                        <option value="">Jenis UKM</option>
                                         @foreach($ukms as $ukm)
                                         <option value="{{ $ukm->id }}">{{ $ukm->name }}</option>
                                         @endforeach
@@ -116,13 +116,13 @@
                         <!-- Additional Information -->
                         <div class="row mb-4">
                             <div class="col-md-12">
-                                <h5 class="font-weight-bold mb-3">Additional Information</h5>
+                                <h5 class="font-weight-bold mb-3">Informasi Tambahan</h5>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="semester">Semester</label>
                                             <select name="semester" id="semester" class="form-control" required>
-                                                <option value="">Select Semester</option>
+                                                <option value="">Pilih Semester</option>
                                                 @for($i = 1; $i <= 8; $i++)
                                                     <option value="{{ $i }}" {{ old('semester') == $i ? 'selected' : '' }}>Semester {{ $i }}</option>
                                                 @endfor
@@ -131,30 +131,29 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="durasi">Duration (minutes)</label>
+                                            <label for="durasi">Durasi (Menit)</label>
                                             <input type="number" name="durasi" id="durasi" class="form-control" min="0" value="{{ old('durasi') }}" required>
-                                            <small class="form-text text-muted">Total duration in minutes</small>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="bukti_file">Upload Evidence Document</label>
+                                    <label for="bukti_file">Upload Dokumentasi</label>
                                     <div class="custom-file">
                                         <input type="file" name="bukti_file" id="bukti_file" class="custom-file-input" accept=".pdf,.jpg,.jpeg,.png">
-                                        <label class="custom-file-label" for="bukti_file">Choose file (PDF, JPG, PNG, max 2MB)</label>
+                                        <label class="custom-file-label" for="bukti_file">Jenis file (PDF, JPG, PNG, max 2MB)</label>
                                     </div>
-                                    <small class="form-text text-muted">Upload supporting documentation for verification</small>
+                                    <small class="form-text text-danger">Unggah dokumentasi pendukung untuk verifikasi</small>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row mt-4">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary btn-lg">
-                                    <i class="fas fa-plus me-1"></i> Create Record
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-plus me-1"></i> Kirim
                                 </button>
                                 <button type="reset" class="btn btn-outline-secondary">
-                                    <i class="fas fa-redo me-1"></i> Reset Form
+                                    <i class="fas fa-redo me-1"></i> Reset
                                 </button>
                             </div>
                         </div>
@@ -167,7 +166,7 @@
             <!-- Existing Records Summary -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Existing Records Summary</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Ringkasan Kegiatan</h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -175,7 +174,7 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>Type</th>
-                                    <th>Name</th>
+                                    <th>Nama</th>
                                     <th>Semester</th>
                                     <th>Status</th>
                                 </tr>
@@ -242,7 +241,7 @@
     }
     .record-type-btn.active, .record-type-btn:hover {
         background-color: #ff9900;
-        color: white;
+        color: rgb(255, 255, 255);
         border-color: #fcbe62;;
     }
     .record-selection {

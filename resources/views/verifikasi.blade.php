@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section('title', 'Related Records Management')
-@section('page-heading', 'Manage Related Records')
+@section('title', 'Kelola Catatan')
+@section('page-heading', 'Kelola Catatan')
 
 @section('content')
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
-            <h6 class="m-0 font-weight-bold text-primary">Related Records Report</h6>
-            <a href="{{ route('related-records.create') }}" class="btn btn-primary btn-sm">
+            <h6 class="m-0 font-weight-bold text-primary">Kelola Catatan Terkait</h6>
+            {{-- <a href="{{ route('related-records.create') }}" class="btn btn-primary btn-sm">
                 <i class="fas fa-plus"></i> Create New Record
-            </a>
+            </a> --}}
         </div>
         <div class="card-body">
             @if(session('success'))
@@ -30,32 +30,32 @@
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-warning font-weight-bold text-info text-uppercase mb-3">
-                                        Report Filters
+                                        Filter Catatan
                                     </div>
                                     <form class="form-inline">
                                         <div class="form-label text-warning">
-                                            <label for="verifiedStatus" class="sr-only">Verification Status</label>
+                                            <label for="verifiedStatus" class="sr-only">Status Verifikasi</label>
                                             <select class="form-control form-control-sm" id="verifiedStatus">
-                                                <option value="">All Verification Status</option>
-                                                <option value="verified">Verified Only</option>
-                                                <option value="not_verified">Not Verified Only</option>
+                                                <option value="">Semua</option>
+                                                <option value="verified">Sudah Verifikasi</option>
+                                                <option value="not_verified">Belum Verifikasi</option>
                                             </select>
                                         </div>
                                         <div class="form-label text-warning">
-                                            <label for="recordType" class="sr-only">Record Type</label>
+                                            <label for="recordType" class="sr-only">Tipe Catatan</label>
                                             <select class="form-control form-control-sm" id="recordType">
-                                                <option value="">All Record Types</option>
-                                                <option value="organization">Organization</option>
+                                                <option value="">Semua</option>
+                                                <option value="organization">Organisasi</option>
                                                 <option value="kepanitiaan">Kepanitiaan</option>
                                                 <option value="magang">Magang</option>
                                                 <option value="tridharma">Tridharma</option>
                                                 <option value="lomba">Lomba</option>
                                             </select>
                                         </div>
-                                        <button type="submit" class="btn btn-sm btn-outline-primary mb-1">
-                                            <i class="fas fa-filter"></i> Apply Filters
+                                        <button type="submit" class="btn btn-info btn-sm mb-1" style="color: rgb(255, 255, 255); background-color: rgb(255, 174, 0); border-color: rgb(255, 174, 0);">
+                                            <i class="fas fa-filter"></i> Terapkan
                                         </button>
-                                    </form>
+                                    </form>     
                                 </div>
                             </div>
                         </div>
@@ -69,10 +69,10 @@
                     <thead class="thead-dark">
                         <tr>
                             <th>ID</th>
-                            <th>User</th>
-                            <th>Record Type</th>
-                            <th>Details</th>
-                            <th>Duration</th>
+                            <th>Pengguna</th>
+                            <th>Tipe Catatan</th>
+                            <th>Detail</th>
+                            <th>Waktu</th>
                             <th>Semester</th>
                             <th>Verification</th>
                             <th>Actions</th>
@@ -211,6 +211,10 @@
     background: #f8f9fc;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     padding: 1.25rem;
+}
+
+#recordsTable {
+  text-align: center;
 }
 
 #filterCard .form-control {

@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
-@section('title', 'Related Records Management')
-@section('page-heading', 'Manage Related Records')
+@section('title', 'Kelola Catatan')
+@section('page-heading', 'Kelola Catatan')
 
 @section('content')
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
-            <h6 class="m-0 font-weight-bold text-primary">Related Records Report</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Kelola Catatan Terkait</h6>
             <a href="{{ route('related-records.create') }}" class="btn btn-primary btn-sm">
-                <i class="fas fa-plus"></i> Create New Record
+                <i class="fas fa-plus"></i> Create
             </a>
         </div>
         <div class="card-body">
@@ -29,23 +29,23 @@
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
-                                    <div class="text-warning font-weight-bold text-info text-uppercase mb-3">
-                                        Report Filters
+                                    <div class="m-0 font-weight-bold text-primary mb-3">
+                                        Filter Laporan
                                     </div>
                                     <form class="form-label text-warning">
                                         <div class="form-label text-warning">
-                                            <label for="verifiedStatus" class="sr-only">Verification Status</label>
+                                            <label for="verifiedStatus" class="sr-only">Status Verifikasi</label>
                                             <select class="form-control form-control-sm" id="verifiedStatus">
-                                                <option value="">All Verification Status</option>
-                                                <option value="verified" selected>Verified Only</option>
-                                                <option value="not_verified">Not Verified Only</option>
+                                                <option value="">Semua</option>
+                                                <option value="verified" selected>Sudah Verifikasi</option>
+                                                <option value="not_verified">Belum Verifikasi</option>
                                             </select>
                                         </div>
                                         <div class="form-label text-warning">
-                                            <label for="recordType" class="sr-only">Record Type</label>
+                                            <label for="recordType" class="sr-only">Jenis Catatan</label>
                                             <select class="form-control form-control-sm" id="recordType">
-                                                <option value="">All Record Types</option>
-                                                <option value="organization">Organization</option>
+                                                <option value="">Semua</option>
+                                                <option value="organization">Organisasi</option>
                                                 <option value="kepaniitiaan">Kepanitiaan</option>
                                                 <option value="magang">Magang</option>
                                                 <option value="tridharma">Tridharma</option>
@@ -56,7 +56,7 @@
                                         <div class="form-label text-warning">
                                             <label for="semesterFilter" class="sr-only">Semester</label>
                                             <select class="form-control form-control-sm" id="semesterFilter">
-                                                <option value="">All Semesters</option>
+                                                <option value="">Semua</option>
                                                 <option value="1">Semester 1</option>
                                                 <option value="2">Semester 2</option>
                                                 <option value="3">Semester 3</option>
@@ -67,8 +67,8 @@
                                                 <option value="8">Semester 8</option>
                                             </select>
                                         </div>
-                                        <button type="submit" class="btn btn-info btn-sm mb-1">
-                                            <i class="fas fa-filter"></i> Apply Filters
+                                        <button type="submit" class="btn btn-info btn-sm mb-1" style="color: rgb(255, 255, 255); background-color: rgb(255, 174, 0); border-color: rgb(255, 174, 0);">
+                                            <i class="fas fa-filter"></i> Terapkan
                                         </button>
                                     </form>
                                 </div>
@@ -84,10 +84,10 @@
                     <thead class="thead-dark">
                         <tr>
                             <th>ID</th>
-                            <th>User</th>
-                            <th>Record Type</th>
-                            <th>Details</th>
-                            <th>Duration</th>
+                            <th>Pengguna</th>
+                            <th>Tipe Catatan</th>
+                            <th>Detail</th>
+                            <th>Waktu</th>
                             <th>Semester</th>
                             <th>Verification</th>
                             <th>Actions</th>
@@ -252,6 +252,10 @@
 .table {
     border-radius: 0.75rem;
     overflow: hidden;
+}
+
+#recordsTable {
+  text-align: center;
 }
 
 .table thead {

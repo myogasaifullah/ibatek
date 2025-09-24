@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Ibatek || Sistem Kendali Mahasiswa Beasiswa</title>
-  <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/logo/ibtk.png">
+  <title>Beranda IBATEK</title>
+  <link rel="shortcut icon" href="{{ asset('build/assets/images/logo/ibtk.png') }}" type="image/x-icon">
 
   <!-- Font & Icons -->
   <link rel="stylesheet" crossorigin="anonymous"
@@ -205,7 +205,7 @@
     <!-- CTA -->
     <section class="bg-primary-gradient text-white text-center fade-in">
       <div class="container p-5 rounded-3">
-        <h4 class="opacity-75">SIAP MENGGUNAKAN</h4>
+        <h4 class="opacity-75">AYOO!! SIAP MENGGUNAKAN</h4>
         <h2 class="fw-bold mt-2">Mulai kelola data mahasiswa dengan IBATEK sekarang</h2>
         <button class="btn btn-light mt-3" onclick="window.location.href='/login'">
           Login Sekarang <span class="fas fa-arrow-right"></span>
