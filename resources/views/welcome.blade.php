@@ -14,6 +14,9 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
   <!-- Bootstrap & Theme -->
   <link href="vendors/swiper/swiper-bundle.min.css" rel="stylesheet">
@@ -25,6 +28,10 @@
       scroll-behavior: smooth;
     }
 
+    .hero-text {
+      font-family: 'Lora', serif;
+    }
+
     .navbar {
       transition: all 0.4s ease;
       background: white;
@@ -34,6 +41,33 @@
       animation: float 3s ease-in-out infinite; /* Nama animasi, durasi, timing function, dan infinite loop */
     }
 
+.floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 119, 0, 0.1);
+            z-index: -19;
+        }
+        
+        .circle-1 {
+            width: 250px;
+            height: 250px;
+            top: -75px;
+            left: -50px;
+        }
+        
+        .circle-2 {
+            width: 250px;
+            height: 250px;
+            bottom: -85px;
+            right: -50px;
+        }
+        
+        .circle-3 {
+            width: 100px;
+            height: 100px;
+            top: -20%;
+            right: 300px;
+          }
     @keyframes float {
       0% {
         transform: translatey(0px); /* Posisi awal */
@@ -104,15 +138,79 @@
       color: #fff;
     }
     .social-icon {
-      color: #555; /* Ganti dengan warna yang Anda inginkan */
+      color: #555;
       font-size: 1.5rem;
       margin-right: 15px;
       transition: color 0.3s ease;
     }
 
     .social-icon:hover {
-      color: #ff9900; /* Ganti dengan warna hover yang Anda inginkan */
+      color: #ff9900;
     }
+
+    #typing-text {
+      border-right: 1px solid;
+      margin-right: 15px;
+      white-space: nowrap;
+      overflow: hidden;
+      animation:
+        blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: initial }
+    }
+
+    .logo-section {
+    padding: 100px 0;
+    background-color: #f8f9fa;
+}
+
+.logo-section h2 {
+    font-size: 2rem;
+    color: #ff9900;
+    margin-bottom: 50px;
+    font-family: 'Poppins';
+    text-align: center; /* Menambahkan ini agar judul rata tengah */
+}
+
+.logo-container {
+    overflow: hidden; /* Menyembunyikan konten di luar area */
+    white-space: nowrap; /* Menjaga semua logo dalam satu baris */
+}
+
+.logo-list {
+    display: inline-block;
+    animation: scroll-left 20s linear infinite; /* Animasi bergerak ke kiri */
+    padding-right: 100%; /* Penting untuk animasi berulang tanpa jeda */
+}
+
+.logo-item {
+    display: inline-block;
+    text-align: center;
+    margin: 0 15px; /* Jarak yang lebih rapi antar logo */
+}
+
+.logo-item img {
+    max-width: 100px;
+    height: auto;
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+}
+
+.logo-item img:hover {
+    opacity: 1;
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
   </style>
 </head>
 
@@ -134,9 +232,12 @@
     <!-- Hero -->
     <section class="mt-6 fade-in">
       <div class="container">
+        <div class="floating-circle circle-1"></div>
+        <div class="floating-circle circle-2"></div>
+        <div class="floating-circle circle-3"></div>
         <div class="row align-items-center text-center text-md-start">
           <div class="col-md-6">
-            <h1 class="display-6 fw-bold">Sistem Kendali Mahasiswa IBATEK</h1>
+            <h1 class="display-6 fw-bold">Sistem Kendali Mahasiswa <span id="typing-text"></span></h1>
             <p class="fs-2 mt-3">Platform terintegrasi untuk memantau, mengelola, dan mengevaluasi aktivitas mahasiswa penerima beasiswa IBATEK.</p>
             <button class="btn btn-secondary mt-3" onclick="window.location.href='/login'">Masuk ke Sistem</button>
             <button class="btn btn-secondary mt-3" onclick="window.location.href='/register'">Daftar Sekarang</button>
@@ -202,11 +303,29 @@
       </div>
     </section>
 
+    <section class="logo-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+          <h2>Support By</h2>
+      </div>
+    </div>
+    <div class="row justify-content-center align-items-center">
+      <div class="col-md-3 col-sm-6 mb-4 logo-item">
+        <img src="build/assets/images/logo/ibtk.png" alt="Logo IBATEK" class="img-fluid">
+          </div>
+          <div class="col-md-3 col-sm-6 mb-4 logo-item">
+            <img src="build/assets/images/logo/UTI.png" alt="Logo UTI" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- CTA -->
     <section class="bg-primary-gradient text-white text-center fade-in">
       <div class="container p-5 rounded-3">
-        <h4 class="opacity-75">AYOO!! SIAP MENGGUNAKAN</h4>
-        <h2 class="fw-bold mt-2">Mulai kelola data mahasiswa dengan IBATEK sekarang</h2>
+        <h4 class="opacity-75">KIP-K Universitas Teknokrat Indonesia</h4>
+        <h2 class="fw-bold mt-2" style="font-family: Dancing Script", cursive;>"Cerdas, Berprestasi, Dengan Beasiswa"</h2>
         <button class="btn btn-light mt-3" onclick="window.location.href='/login'">
           Login Sekarang <span class="fas fa-arrow-right"></span>
         </button>
@@ -302,6 +421,40 @@
     }
     window.addEventListener("scroll", checkFade);
     window.addEventListener("load", checkFade);
+
+    document.addEventListener('DOMContentLoaded', function() {
+  const textElement = document.getElementById('typing-text');
+  const textToType = " IBATEK";
+  let isTyping = true;
+  let charIndex = 0;
+  const typingSpeed = 150;
+  const erasingSpeed = 100;
+  const delayBetweenActions = 1500;
+
+  function typeText() {
+    if (isTyping) {
+      if (charIndex < textToType.length) {
+        textElement.textContent += textToType.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeText, typingSpeed);
+      } else {
+        isTyping = false;
+        setTimeout(typeText, delayBetweenActions);
+      }
+    } else {
+      if (charIndex > 0) {
+        textElement.textContent = textToType.substring(0, charIndex - 1);
+        charIndex--;
+        setTimeout(typeText, erasingSpeed);
+      } else {
+        isTyping = true;
+        setTimeout(typeText, delayBetweenActions);
+      }
+    }
+  }
+
+  typeText();
+});
   </script>
 </body>
 
