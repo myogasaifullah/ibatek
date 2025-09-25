@@ -13,7 +13,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Form Tambah Kegiatan</h6>
                     <div>
                         <a href="{{ route('related-records.index') }}" class="btn btn-sm btn-secondary">
-                            <i class="fas fa-arrow-left me-1"></i> Kembali
+                            <i class="fas fa-arrow-left"></i> Kembali
                         </a>
                     </div>
                 </div>
@@ -183,11 +183,11 @@
                                 @foreach($relatedRecords as $record)
                                 <tr class="record-row" data-semester="{{ $record->semester ?? '' }}">
                                     <td>
-                                        @if($record->organization_id) Org
-                                        @elseif($record->kepaniitiaan_id) Kep
-                                        @elseif($record->magang_id) Mag
-                                        @elseif($record->tridharma_id) Tri
-                                        @elseif($record->lomba_id) Lom
+                                        @if($record->organization_id) Organisasi
+                                        @elseif($record->kepaniitiaan_id) Kepanitiaan
+                                        @elseif($record->magang_id) Magang
+                                        @elseif($record->tridharma_id) Tridharma
+                                        @elseif($record->lomba_id) Lomba
                                         @elseif($record->ukm_id) UKM
                                         @else Other
                                         @endif
@@ -267,6 +267,19 @@
         font-size: 0.7rem;
         padding: 0.35em 0.65em;
     }
+    .badge-success {
+    background: #28a7451a;
+    color: #28a745;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.badge-warning {
+    background: #ffc1071a;
+    color: #000000;
+    border-radius: 20px;
+    font-weight: 500;
+}
     @media print {
         .btn, .custom-file, .form-text, .progress {
             display: none !important;
